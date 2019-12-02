@@ -19,5 +19,6 @@
     <modules>
         <module>bioscoop-app-api-gateway/pom.xml</module>
         <module>bioscoop-app-schedule-service</module>
+        <module>bioscoop-app-hall-mgmt-service</module>
     </modules>
 </project>
