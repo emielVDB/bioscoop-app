@@ -11,8 +11,7 @@ services:
       - mongo-volume:/data/db
     ports:
       - '27017-27019:27017-27019'
-volumes:
-  mongo-volume:
+
 
   scheduleDB:
     image: mysql
@@ -20,3 +19,9 @@ volumes:
     environment:
       MYSQL_ROOT_PASSWORD: example
       MYSQL_DATABASE: scheduleDB
+
+
+
+volumes:
+  mongo-volume:
+
