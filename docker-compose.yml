@@ -15,13 +15,13 @@ services:
 
   scheduleDB:
     image: mysql
-    container_name: 'mongodb'
+    container_name: 'schedule_sql_db'
     command: --default-authentication-plugin=mysql_native_password
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: scheduleDB
     ports:
-     - '3306:3306'
+      - '3306:3306'
 
 
 
