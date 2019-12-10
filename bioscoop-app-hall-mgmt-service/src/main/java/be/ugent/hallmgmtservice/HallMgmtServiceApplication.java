@@ -19,9 +19,7 @@ public class HallMgmtServiceApplication {
     Logger logger = LoggerFactory.getLogger(HallMgmtServiceApplication.class);
 
     public static void main(String[] args) {
-
         SpringApplication.run(HallMgmtServiceApplication.class, args);
-//        System.out.print("hall management service started...");
     }
 
     private Hall createHall(String name, String screenSize, int numberOfRows, int numberOfSeats){
@@ -55,7 +53,14 @@ public class HallMgmtServiceApplication {
             repository.save(createHall("Zaal 1", "5m x 10m", 20, 35));
             repository.save(createHall("Zaal 2", "8m x 12m", 30, 40));
             repository.save(createHall("Zaal 3", "2m x 3m", 8, 15));
+            logger.info("populated with data");
         });
     }
 
+    @Bean
+    public CommandLineRunner getHalls(HallRepository repository){
+        return(args ->{
+            repository.findAll().forEach((hall) -> logger.info(hall.getName()));
+        });
+    }
 }

@@ -5,4 +5,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface HallRepository extends MongoRepository<Hall, String> {
     Hall findByName(String Name);
+
 }

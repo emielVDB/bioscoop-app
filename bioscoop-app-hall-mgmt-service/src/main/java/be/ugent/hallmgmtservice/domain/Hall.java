@@ -18,6 +18,8 @@ public class Hall {
     private List<String> facilities;
     private List<String> technologies;
 
+    public Hall(){}
+
     public Hall(String name, List<Seat> seats, String screenSize, List<String> facilities, List<String> technologies) {
         this.name = name;
         this.seats = seats;
