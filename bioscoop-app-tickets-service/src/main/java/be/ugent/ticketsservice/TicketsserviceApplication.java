@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
 import java.util.Date;
 
 @SpringBootApplication
@@ -21,9 +22,13 @@ public class TicketsserviceApplication {
     @Bean
     public CommandLineRunner populateDatabase(TicketRepository ticketRepository) {
         return (args) ->{
+                System.out.println("Booking ticket");
                 ticketRepository.deleteAll();
-                Ticket t=new Ticket();
+                Ticket t=new Ticket("Manu",13,2,"Joker",LocalDate.now().plus(3, ChronoUnit.DAYS),8.50);
+                t.setDateBooked(LocalDate.now());
                 ticketRepository.save(t);
+                System.out.println("Ticket booked");
+
         };
     }
 }
