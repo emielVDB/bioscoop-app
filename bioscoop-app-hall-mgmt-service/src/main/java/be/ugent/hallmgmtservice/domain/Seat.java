@@ -6,24 +6,49 @@ public class Seat {
 
     @Id
     private String id;
-    private int nr;
+    private int seatNumber;
+    private int rowNumber;
     private SeatType type;
     private SeatStatus status;
 
     public Seat(){}
 
-    public Seat(int nr, SeatType type, SeatStatus status) {
-        this.nr = nr;
+    public Seat(int seatNumber, int rowNumber, SeatType type, SeatStatus status) {
+        this.seatNumber = seatNumber;
+        this.rowNumber = rowNumber;
         this.type = type;
         this.status = status;
     }
 
-    public int getNr() {
-        return nr;
+    public Seat(int seatNumber, int rowNumber, SeatType type) {
+        this.seatNumber = seatNumber;
+        this.rowNumber = rowNumber;
+        this.type = type;
+        this.status = SeatStatus.AVAILABLE;
     }
 
-    public void setNr(int nr) {
-        this.nr = nr;
+    public String getId() {
+        return id;
+    }
+
+    public int getRowNumber() {
+        return rowNumber;
+    }
+
+    public void setRowNumber(int rowNumber) {
+        this.rowNumber = rowNumber;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public int getSeatNumber() {
+        return seatNumber;
+    }
+
+    public void setSeatNumber(int seatNumber) {
+        this.seatNumber = seatNumber;
     }
 
     public SeatType getType() {
