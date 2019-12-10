@@ -17,7 +17,7 @@ public class ApiGatewayApplication {
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
         return builder.routes()
                 // Patient service routes
-                .route(r -> r.host("*").and().path("/patient/**").uri("http://localhost:2222"))
+                .route(r -> r.host("*").and().path("/ticket/**").uri("http://localhost:2222"))
                 // Reception service routes
                 .route(r -> r.host("*").and().path("/reception/**").uri("http://localhost:2223"))
 
