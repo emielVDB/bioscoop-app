@@ -3,7 +3,6 @@ package be.ugent.hallmgmtservice.domain;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.sql.Array;
 import java.util.Arrays;
 import java.util.List;
 
@@ -13,22 +12,25 @@ public class Hall {
     @Id
     private String id;
     private String name;
-    private List<Row> rows;
+    private List<Seat> seats;
     private String screenSize;
+    private int capacity;
     private List<String> facilities;
     private List<String> technologies;
 
-    public Hall(String name, List<Row> rows, String screenSize, List<String> facilities, List<String> technologies) {
+    public Hall(String name, List<Seat> seats, String screenSize, List<String> facilities, List<String> technologies) {
         this.name = name;
-        this.rows = rows;
+        this.seats = seats;
+        this.capacity = seats.size();
         this.screenSize = screenSize;
         this.facilities = facilities;
         this.technologies = technologies;
     }
 
-    public Hall(String name, List<Row> rows, String screenSize){
+    public Hall(String name, List<Seat> seats, String screenSize){
         this.name = name;
-        this.rows = rows;
+        this.seats = seats;
+        this.capacity = seats.size();
         this.screenSize = screenSize;
         this.facilities = Arrays.asList("toegankelijk voor andersvaliden", "test");
         this.technologies = Arrays.asList("Dolby 5.1", "HFR");
@@ -42,12 +44,12 @@ public class Hall {
         this.name = name;
     }
 
-    public List<Row> getRows() {
-        return rows;
+    public List<Seat> getSeats() {
+        return seats;
     }
 
-    public void setRows(List<Row> rows) {
-        this.rows = rows;
+    public void setSeats(List<Seat> seats) {
+        this.seats = seats;
     }
 
     public String getScreenSize() {
