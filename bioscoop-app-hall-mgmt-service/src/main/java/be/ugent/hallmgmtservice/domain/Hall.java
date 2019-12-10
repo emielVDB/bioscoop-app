@@ -11,7 +11,7 @@ public class Hall {
 
     @Id
     private String id;
-    private String name;
+    private int number;
     private List<Seat> seats;
     private String screenSize;
     private int capacity;
@@ -20,8 +20,8 @@ public class Hall {
 
     public Hall(){}
 
-    public Hall(String name, List<Seat> seats, String screenSize, List<String> facilities, List<String> technologies) {
-        this.name = name;
+    public Hall(int number, List<Seat> seats, String screenSize, List<String> facilities, List<String> technologies) {
+        this.number = number;
         this.seats = seats;
         this.capacity = seats.size();
         this.screenSize = screenSize;
@@ -29,8 +29,8 @@ public class Hall {
         this.technologies = technologies;
     }
 
-    public Hall(String name, List<Seat> seats, String screenSize){
-        this.name = name;
+    public Hall(int number, List<Seat> seats, String screenSize){
+        this.number = number;
         this.seats = seats;
         this.capacity = seats.size();
         this.screenSize = screenSize;
@@ -38,13 +38,9 @@ public class Hall {
         this.technologies = Arrays.asList("Dolby 5.1", "HFR");
     }
 
-    public String getName() {
-        return name;
-    }
+    public int getNumber() { return number; }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public void setNumber(int number) { this.number = number; }
 
     public List<Seat> getSeats() {
         return seats;
@@ -76,6 +72,10 @@ public class Hall {
 
     public void setTechnologies(List<String> technologies) {
         this.technologies = technologies;
+    }
+
+    public Object orElse(Object o) {
+        return o;
     }
 }
 
