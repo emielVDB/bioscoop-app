@@ -62,19 +62,11 @@ public class HallMgmtServiceApplication {
     @Bean
     public CommandLineRunner postInEventHall(HallRepository hallRepository, EventHallRepository eventHallRepository){
         return(args ->{
+            eventHallRepository.deleteAll();
             Hall hall = hallRepository.findByNumber(1);
             EventHall eventHall = new EventHall(hall, 4);
             eventHallRepository.save(eventHall);
             logger.info("added event hall");
-        });
-    }
-
-    @Bean
-    public CommandLineRunner getEventHall(EventHallRepository eventHallRepository){
-        return(args ->{
-            EventHall eventHall = eventHallRepository.findByEventId(4);
-//            logger.info("{}", eventHall.getNumber(), eventHall.getEventId());
-            logger.info("gevonden");
         });
     }
 }
