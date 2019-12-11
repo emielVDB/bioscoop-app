@@ -29,7 +29,8 @@ public class TicketRestController {
     }
     @PostMapping()
     public void bookTicket(@RequestBody Ticket ticket){
-
+        // Hier nog check doen bij management service of de stoelen nog beschikbaar zijn
+        // Ook nog mogelijke eten/drinken bestellen bij catering service
         ticket.setDateBooked(LocalDate.now());
         repository.save(ticket);
     }
