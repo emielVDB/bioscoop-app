@@ -1,9 +1,6 @@
 package be.ugent.ticketsservice.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
@@ -21,6 +18,7 @@ public class Ticket {
     private int hallnumber;
     private String event;
     private LocalDate dateEvent;
+    //private List<Consumption> consumptions;
 
     private LocalDate dateBooked; //Wanneer het ticket geboekt werd
     private double price;
