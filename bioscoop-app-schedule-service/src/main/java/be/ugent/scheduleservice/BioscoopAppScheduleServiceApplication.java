@@ -26,7 +26,7 @@ public class BioscoopAppScheduleServiceApplication {
         return (args) ->{
             logger.info("Insert");
 
-            scheduleRepository.deleteAll();
+            /*scheduleRepository.deleteAll();
             Schedule schedule =new Schedule();
 
             LocalDateTime Nu = LocalDateTime.now();
@@ -37,7 +37,7 @@ public class BioscoopAppScheduleServiceApplication {
             schedule.setMediaId(1);
             schedule.setMediaId(2);
 
-            scheduleRepository.save(schedule);
+            //scheduleRepository.save(schedule);
 
 
 
@@ -49,7 +49,7 @@ public class BioscoopAppScheduleServiceApplication {
                 logger.info(s.getBeginDate()+"");
 
             }
-
+            */
 
         };
     }

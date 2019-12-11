@@ -12,7 +12,7 @@ public class Schedule {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String scheduleId;
+    private int scheduleId;
 
     private LocalDateTime beginDate;
     private LocalDateTime endDate;
