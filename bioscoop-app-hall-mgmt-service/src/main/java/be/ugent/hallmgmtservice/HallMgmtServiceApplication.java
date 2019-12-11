@@ -1,9 +1,11 @@
 package be.ugent.hallmgmtservice;
 
 import be.ugent.hallmgmtservice.domain.*;
+import be.ugent.hallmgmtservice.persistence.EventHallRepository;
 import be.ugent.hallmgmtservice.persistence.HallRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,12 +21,10 @@ public class HallMgmtServiceApplication {
     Logger logger = LoggerFactory.getLogger(HallMgmtServiceApplication.class);
 
     public static void main(String[] args) {
-
         SpringApplication.run(HallMgmtServiceApplication.class, args);
-//        System.out.print("hall management service started...");
     }
 
-    private Hall createHall(String name, String screenSize, int numberOfRows, int numberOfSeats){
+    private Hall createHall(int number, String screenSize, int numberOfRows, int numberOfSeats){
         //create seats
         Random rand = new Random();
         List<Seat> seats = new ArrayList<Seat>();
@@ -44,7 +44,7 @@ public class HallMgmtServiceApplication {
                 seats.add(seat);
             }
         }
-        return new Hall(name, seats, screenSize);
+        return new Hall(number, seats, screenSize);
     }
 
     @Bean
@@ -52,10 +52,21 @@ public class HallMgmtServiceApplication {
         return(args -> {
             repository.deleteAll();
             logger.info("populating with data...");
-            repository.save(createHall("Zaal 1", "5m x 10m", 20, 35));
-            repository.save(createHall("Zaal 2", "8m x 12m", 30, 40));
-            repository.save(createHall("Zaal 3", "2m x 3m", 8, 15));
+            repository.save(createHall(1, "5m x 10m", 20, 35));
+            repository.save(createHall( 2, "8m x 12m", 30, 40));
+            repository.save(createHall(3, "2m x 3m", 8, 15));
+            logger.info("populated with data");
         });
     }
 
+    @Bean
+    public CommandLineRunner postInEventHall(HallRepository hallRepository, EventHallRepository eventHallRepository){
+        return(args ->{
+            eventHallRepository.deleteAll();
+            Hall hall = hallRepository.findByNumber(1);
+            EventHall eventHall = new EventHall(hall, 4);
+            eventHallRepository.save(eventHall);
+            logger.info("added event hall");
+        });
+    }
 }
