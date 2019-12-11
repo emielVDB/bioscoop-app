@@ -14,7 +14,7 @@ public class Ticket {
     // allereerst wordt er een createTicket uitgestuurd met de eventdetails en daarna worden de zetels opgevraagd die nog beschikbaar zijn en dan
     // wordt het ticket geboekt
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
     private String name;
     private int seatsNumber;
