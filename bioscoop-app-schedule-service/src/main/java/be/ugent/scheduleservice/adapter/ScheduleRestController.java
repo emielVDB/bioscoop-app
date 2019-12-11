@@ -22,7 +22,7 @@ public class ScheduleRestController {
         return scheduleRepository.findAll();
     }
 
-
+    //via -> http://127.0.0.1:2223/schedule/2018-11-02
     @GetMapping("/{datum}")
     public Iterable<Schedule> getByDay(@PathVariable("datum") String datum)
     {
@@ -31,6 +31,7 @@ public class ScheduleRestController {
         return scheduleRepository.getScheduleByDay(datum);
     }
 
+    //via -> http://127.0.0.1:2223/schedule
     @PostMapping()
     //public Iterable<Schedule> postSchedule(@RequestBody Schedule schedule)
     public ResponseEntity postSchedule(@RequestBody Schedule schedule)
