@@ -32,19 +32,23 @@ public class BioscoopAppScheduleServiceApplication {
 
 
             LocalDateTime date=LocalDateTime.of(2018,11,2,5,0,0);
-            Schedule schedule =new Schedule(date,date,10,6,EventType.FILM);
+            LocalDateTime endDate=LocalDateTime.of(2018,11,2,7,0,0);
+            Schedule schedule =new Schedule(date,endDate,10,6,EventType.FILM);
             scheduleRepository.save(schedule);
 
             date=LocalDateTime.of(2018,11,2,5,0,0);
-            schedule =new Schedule(date,date,11,4,EventType.FILM);
+            endDate=LocalDateTime.of(2018,11,2,7,0,0);
+            schedule =new Schedule(date,endDate,11,4,EventType.FILM);
             scheduleRepository.save(schedule);
 
             date=LocalDateTime.of(2018,11,5,5,0,0);
-            schedule =new Schedule(date,date,11,5,EventType.FILM);
+            endDate=LocalDateTime.of(2018,11,5,7,0,0);
+            schedule =new Schedule(date,endDate,11,5,EventType.FILM);
             scheduleRepository.save(schedule);
 
             date=LocalDateTime.of(2018,11,6,5,0,0);
-            schedule =new Schedule(date,date,12,7,EventType.FILM);
+            endDate=LocalDateTime.of(2018,11,6,7,0,0);
+            schedule =new Schedule(date,endDate,12,7,EventType.FILM);
             scheduleRepository.save(schedule);
 
 
