@@ -1,9 +1,11 @@
 package be.ugent.hallmgmtservice;
 
 import be.ugent.hallmgmtservice.domain.*;
+import be.ugent.hallmgmtservice.persistence.EventHallRepository;
 import be.ugent.hallmgmtservice.persistence.HallRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -54,6 +56,25 @@ public class HallMgmtServiceApplication {
             repository.save(createHall( 2, "8m x 12m", 30, 40));
             repository.save(createHall(3, "2m x 3m", 8, 15));
             logger.info("populated with data");
+        });
+    }
+
+    @Bean
+    public CommandLineRunner postInEventHall(HallRepository hallRepository, EventHallRepository eventHallRepository){
+        return(args ->{
+            Hall hall = hallRepository.findByNumber(1);
+            EventHall eventHall = new EventHall(hall, 4);
+            eventHallRepository.save(eventHall);
+            logger.info("added event hall");
+        });
+    }
+
+    @Bean
+    public CommandLineRunner getEventHall(EventHallRepository eventHallRepository){
+        return(args ->{
+            EventHall eventHall = eventHallRepository.findByEventId(4);
+//            logger.info("{}", eventHall.getNumber(), eventHall.getEventId());
+            logger.info("gevonden");
         });
     }
 }

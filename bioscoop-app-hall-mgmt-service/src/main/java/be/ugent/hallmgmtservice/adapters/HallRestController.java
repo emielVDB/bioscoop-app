@@ -1,4 +1,4 @@
-package be.ugent.hallmgmtservice.be.ugent.hallmgmtservice.adapters;
+package be.ugent.hallmgmtservice.adapters;
 
 import be.ugent.hallmgmtservice.domain.Hall;
 import be.ugent.hallmgmtservice.persistence.HallRepository;
