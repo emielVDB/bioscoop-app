@@ -1,5 +1,7 @@
 package be.ugent.hallmgmtservice;
 
+import be.ugent.hallmgmtservice.adapters.messaging.Channels;
+import be.ugent.hallmgmtservice.adapters.messaging.MessageGateway;
 import be.ugent.hallmgmtservice.domain.*;
 import be.ugent.hallmgmtservice.persistence.EventHallRepository;
 import be.ugent.hallmgmtservice.persistence.HallRepository;
@@ -9,13 +11,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.context.annotation.Bean;
+import org.springframework.messaging.MessageChannel;
+
 import java.util.Random;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootApplication
+@EnableBinding(Channels.class)
 public class HallMgmtServiceApplication {
 
     Logger logger = LoggerFactory.getLogger(HallMgmtServiceApplication.class);
@@ -69,4 +75,13 @@ public class HallMgmtServiceApplication {
             logger.info("added event hall");
         });
     }
+
+//    @Bean
+//    public CommandLineRunner sendMessage(MessageGateway gateway, EventHallRepository eventHallRepository){
+//        return(args -> {
+//            logger.info("zend bericht");
+//            gateway.bookSeatsCompleted(eventHallRepository.findByEventId(1));
+//
+//        });
+//    }
 }
