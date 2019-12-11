@@ -1,3 +1,4 @@
 apiGateway: 3000
 hallManagement: 2221
 ticketService: 2222
+schedule: 2223

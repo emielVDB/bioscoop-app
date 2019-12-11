@@ -1,5 +1,6 @@
 package be.ugent.scheduleservice;
 
+import be.ugent.scheduleservice.domain.EventType;
 import be.ugent.scheduleservice.domain.Schedule;
 import be.ugent.scheduleservice.persistence.ScheduleRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -26,7 +27,7 @@ public class BioscoopAppScheduleServiceApplication {
         return (args) ->{
             logger.info("Insert");
 
-            /*scheduleRepository.deleteAll();
+            scheduleRepository.deleteAll();
             Schedule schedule =new Schedule();
 
             LocalDateTime Nu = LocalDateTime.now();
@@ -35,9 +36,9 @@ public class BioscoopAppScheduleServiceApplication {
             schedule.setEndDate(Nu);
             schedule.setZaalNmr(10);
             schedule.setMediaId(1);
-            schedule.setMediaId(2);
+            schedule.setEventType(EventType.FILM);
 
-            //scheduleRepository.save(schedule);
+            scheduleRepository.save(schedule);
 
 
 
@@ -49,7 +50,7 @@ public class BioscoopAppScheduleServiceApplication {
                 logger.info(s.getBeginDate()+"");
 
             }
-            */
+
 
         };
     }

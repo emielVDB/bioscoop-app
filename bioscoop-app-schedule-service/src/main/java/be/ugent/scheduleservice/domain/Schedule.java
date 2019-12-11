@@ -1,5 +1,6 @@
 package be.ugent.scheduleservice.domain;
 
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,14 +13,13 @@ public class Schedule {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int scheduleId;
+    private int eventId;
 
     private LocalDateTime beginDate;
     private LocalDateTime endDate;
+    private EventType eventType;
     private int zaalNmr;
-    private int eventId;
     private int mediaId;
-
 
 
     public Schedule()
@@ -27,15 +27,23 @@ public class Schedule {
 
     }
 
-    public Schedule(LocalDateTime beginDate,LocalDateTime endDate,int zaalNmr,int eventId,int mediaId)
+    public Schedule(LocalDateTime beginDate,LocalDateTime endDate,int zaalNmr,int mediaId, EventType eventType)
     {
         this.beginDate=beginDate;
         this.endDate=endDate;
         this.zaalNmr=zaalNmr;
-        this.eventId=eventId;
         this.mediaId=mediaId;
+        this.eventType=eventType;
     }
 
+
+    public EventType getEventType() {
+        return eventType;
+    }
+
+    public void setEventType(EventType eventType) {
+        this.eventType = eventType;
+    }
 
     public LocalDateTime getBeginDate() {
         return beginDate;
@@ -59,14 +67,6 @@ public class Schedule {
 
     public void setZaalNmr(int zaalNmr) {
         this.zaalNmr = zaalNmr;
-    }
-
-    public int getEventId() {
-        return eventId;
-    }
-
-    public void setEventId(int eventId) {
-        this.eventId = eventId;
     }
 
     public int getMediaId() {

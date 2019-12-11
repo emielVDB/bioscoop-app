@@ -1,3 +1,0 @@
-INSERT INTO schedule (begin_date,end_date,zaal_nmr,media_id,event_id,schedule_id) VALUES ('2010-02-02 00:05:00','2010-02-02 00:10:00',20,1,1,1)
-INSERT INTO schedule (begin_date,end_date,zaal_nmr,media_id,event_id,schedule_id) VALUES ('2010-02-02 00:05:00','2010-02-02 00:10:00',20,1,1,2)
-INSERT INTO schedule (begin_date,end_date,zaal_nmr,media_id,event_id,schedule_id) VALUES ('2010-02-02 00:05:00','2010-02-02 00:10:00',20,1,1,3)
