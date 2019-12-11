@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.Arrays;
 import java.util.List;
 
-@Document //MongoDB
+@Document(collection = "hall") //MongoDB
 public class Hall {
 
     @Id
