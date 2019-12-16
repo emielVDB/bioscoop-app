@@ -2,10 +2,10 @@ package be.ugent.hallmgmtservice.domain;
 
 import org.springframework.data.annotation.Id;
 
+
 public class Seat {
 
-    @Id
-    private String id;
+    private long id;
     private int seatNumber;
     private int rowNumber;
     private SeatType type;
@@ -14,6 +14,7 @@ public class Seat {
     public Seat(){}
 
     public Seat(int seatNumber, int rowNumber, SeatType type, SeatStatus status) {
+        this.setId(rowNumber, seatNumber);
         this.seatNumber = seatNumber;
         this.rowNumber = rowNumber;
         this.type = type;
@@ -27,7 +28,7 @@ public class Seat {
         this.status = SeatStatus.AVAILABLE;
     }
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
@@ -39,8 +40,11 @@ public class Seat {
         this.rowNumber = rowNumber;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setId(int row, int seat) {
+        this.id = Long.parseLong(String.format("%02d%02d", rowNumber, seatNumber));
+    }
+    public void setId(int row, int seat, int eventid) {
+        this.id = Long.parseLong(String.format("%02d%02d%02d", rowNumber, seatNumber, eventid));
     }
 
     public int getSeatNumber() {
