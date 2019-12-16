@@ -6,24 +6,24 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.List;
 
-//@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class BookSeatRequest {
-    private int eventId;
-    private List<Long> seats;
+    private int eventid;
+    private List<Seat> seats;
 
-    public int getEventId() {
-        return eventId;
+    public int getEventid() {
+        return eventid;
     }
 
-    public void setEventId(int eventId) {
-        this.eventId = eventId;
+    public void setEventid(int eventid) {
+        this.eventid = eventid;
     }
 
-    public List<Long> getSeats() {
+    public List<Seat> getSeats() {
         return seats;
     }
 
-    public void setSeats(List<Long> seats) {
+    public void setSeats(List<Seat> seats) {
         this.seats = seats;
     }
 }

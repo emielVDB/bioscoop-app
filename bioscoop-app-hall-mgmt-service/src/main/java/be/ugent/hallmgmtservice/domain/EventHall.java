@@ -5,6 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Document(collection = "eventhall")
 public class EventHall extends Hall {
@@ -26,6 +27,12 @@ public class EventHall extends Hall {
             seats.add(s);
         }
         this.setSeats(seats);
+    }
+
+    public Optional<Seat> getSeatById(long id){
+        return this.getSeats().stream()
+                .filter(seat -> seat.getId() == id)
+                .findAny();
     }
 
     public int getEventId() { return eventId; }

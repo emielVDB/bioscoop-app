@@ -24,12 +24,12 @@ public class HallMGMTEventHandler {
     @StreamListener(Channels.BOOK_SEATS)
     @SendTo(Channels.BOOKED_SEATS)
     public BookSeatResponse bookSeat(BookSeatRequest request){
-        logger.info("received request for booking seats for eventid " + request.getEventId());
-        List<Seat> bookedSeats = eventHallService.bookSeats(request.getEventId(), request.getSeats());
+        logger.info("received request for booking seats for eventid " + request.getEventid());
+        List<Seat> bookedSeats = eventHallService.bookSeats(request.getEventid(), request.getSeats());
         if(bookedSeats != null){
-            return new BookSeatResponse(request.getEventId(), bookedSeats);
+            return new BookSeatResponse(request.getEventid(), bookedSeats);
         }else{
-            return new BookSeatResponse(request.getEventId(), null);
+            return new BookSeatResponse(request.getEventid(), null);
         }
     }
 }
