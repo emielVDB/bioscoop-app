@@ -1,8 +1,8 @@
 version: '3'
 services:
-  mongo:
+  hallDB:
     image: 'mongo'
-    container_name: 'mongodb'
+    container_name: 'hall_mongo_db'
     environment:
       # provide your credentials here
       - MONGO_INITDB_ROOT_USERNAME=root
@@ -10,8 +10,18 @@ services:
     volumes:
       - mongo-volume:/data/db
     ports:
-      - '27017-27019:27017-27019'
+      - '27017:27017'
 
+  mediaDB:
+    image: 'mongo'
+    container_name: 'media_mongo_db'
+    environment:
+      # provide your credentials here
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+
+    ports:
+      - '27020:27017'
 
   scheduleDB:
     image: mysql:5.7
