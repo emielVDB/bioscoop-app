@@ -21,5 +21,7 @@
         <module>bioscoop-app-schedule-service</module>
         <module>bioscoop-app-hall-mgmt-service</module>
         <module>bioscoop-app-tickets-service</module>
+        <module>bioscoop-app-media-service</module>
+        <module>bioscoop-app-staff-service</module>
     </modules>
 </project>

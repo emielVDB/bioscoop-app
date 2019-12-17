@@ -16,10 +16,16 @@ public class ApiGatewayApplication {
     @Bean
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
         return builder.routes()
-                // Patient service routes
+                // ticket service routes
                 .route(r -> r.host("*").and().path("/ticket/**").uri("http://localhost:2222"))
-                // Reception service routes
-                .route(r -> r.host("*").and().path("/reception/**").uri("http://localhost:2223"))
+                // hallmgmt service routes
+                .route(r -> r.host("*").and().path("/hall/**").uri("http://localhost:2221"))
+                // schedule service routes
+                .route(r -> r.host("*").and().path("/schedule/**").uri("http://localhost:2223"))
+                // staff service routes
+                .route(r -> r.host("*").and().path("/staff/**").uri("http://localhost:2224"))
+                // media service routes
+                .route(r -> r.host("*").and().path("/media/**").uri("http://localhost:2225"))
 
                 // it is also possible to give independent paths:
                 // .route(r ->
