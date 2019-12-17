@@ -1,6 +1,5 @@
 package be.ugent.hallmgmtservice.domain;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.text.SimpleDateFormat;
@@ -11,22 +10,20 @@ import java.util.Optional;
 
 @Document(collection = "eventhall")
 public class EventHall extends Hall {
-    //id exists of the day + month + year + seconds when the eventhall is created + hallnumber
-    //ddMMyysshallnumber
-    private Long eventId;
+    private int eventHallId;
 
     public EventHall(){}
 
-    public EventHall(Hall hall) {
+    public EventHall(Hall hall, int eventId) {
         super();
-        this.setEventId(hall.getNumber());
+        this.eventHallId = eventId;
         this.setFacilities(hall.getFacilities());
         this.setNumber(hall.getNumber());
         this.setScreenSize(hall.getScreenSize());
         this.setTechnologies(hall.getTechnologies());
         List<Seat> seats = new ArrayList<>();
         for(Seat s : hall.getSeats()){
-            s.setId(s.getRowNumber(), s.getSeatNumber(), this.eventId);
+            s.setId(s.getRowNumber(), s.getSeatNumber(), this.eventHallId);
             seats.add(s);
         }
         this.setSeats(seats);
@@ -38,12 +35,13 @@ public class EventHall extends Hall {
                 .findAny();
     }
 
-    public Long getEventId() { return eventId; }
+    public int getEventHallId() { return eventHallId; }
 
-    public void setEventId(int hallNumber) {
-        SimpleDateFormat formatter= new SimpleDateFormat("ddMMyyss");
-        Date date = new Date(System.currentTimeMillis());
-        System.out.println(formatter.format(date));
-        this.eventId = Long.parseLong(String.format("%s%02d", formatter.format(date), hallNumber));
+    private void setEventHallId(int eventId) {
+        this.eventHallId = eventId;
+//        SimpleDateFormat formatter= new SimpleDateFormat("ddMMyyss");
+//        Date date = new Date(System.currentTimeMillis());
+//        System.out.println(formatter.format(date));
+//        this.eventHallId = Long.parseLong(String.format("%s%02d", formatter.format(date), hallNumber));
     }
 }

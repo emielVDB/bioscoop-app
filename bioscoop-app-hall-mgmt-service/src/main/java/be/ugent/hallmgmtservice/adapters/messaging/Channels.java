@@ -13,7 +13,7 @@ public interface Channels {
     static final String BOOKED_SEATS = "booked_seats";
 
     @Input(RESERVE_HALL)
-    SubscribableChannel reserveBed();
+    SubscribableChannel reserveHall();
 
     @Output(RESERVED_HALL)
     MessageChannel reservedHall();

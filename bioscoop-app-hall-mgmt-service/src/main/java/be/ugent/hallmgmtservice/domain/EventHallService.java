@@ -2,6 +2,7 @@ package be.ugent.hallmgmtservice.domain;
 
 import be.ugent.hallmgmtservice.HallMgmtServiceApplication;
 import be.ugent.hallmgmtservice.persistence.EventHallRepository;
+import be.ugent.hallmgmtservice.persistence.HallRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +17,18 @@ public class EventHallService {
     Logger logger = LoggerFactory.getLogger(HallMgmtServiceApplication.class);
 
     private final EventHallRepository eventHallRepository;
+    private final HallRepository hallRepository;
 
     @Autowired
-    public EventHallService(EventHallRepository eventHallRepository){this.eventHallRepository = eventHallRepository;}
+    public EventHallService(EventHallRepository eventHallRepository, HallRepository hallRepository) {
+        this.eventHallRepository = eventHallRepository;
+        this.hallRepository = hallRepository;
+    }
 
-    public List<Seat> bookSeats(int eventId, List<Seat> requestedSeats){
+
+    public List<Seat> bookSeats(int eventHallId, List<Seat> requestedSeats){
         //find event
-        final EventHall h = eventHallRepository.findByEventId(eventId);
+        final EventHall h = eventHallRepository.findByEventHallId(eventHallId);
         if(h != null){
             //check if seat exists and is available
             List<Seat> availableSeats = new ArrayList<>();
@@ -56,5 +62,17 @@ public class EventHallService {
             }
         }
         return null;
+    }
+
+    public int reserveHall(int hallNumber, int eventId) {
+        Hall hall = hallRepository.findByNumber(hallNumber);
+        if(hall != null){
+            EventHall newEventHall = new EventHall(hall, eventId);
+            EventHall ceatedEventHall = eventHallRepository.save(newEventHall);
+            return ceatedEventHall.getEventHallId();
+        }else{
+            logger.info("Error occured while reserving a hall: hall doesn't exist.");
+            return -1;
+        }
     }
 }

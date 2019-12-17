@@ -6,5 +6,5 @@ import org.springframework.data.mongodb.repository.Query;
 
 
 public interface EventHallRepository extends MongoRepository<EventHall, String> {
-    EventHall findByEventId(int eventId);
+    EventHall findByEventHallId(int eventHallId);
 }

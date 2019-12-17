@@ -26,7 +26,7 @@ public class HallRestController {
     }
 
     @GetMapping("/{number}")
-    public ResponseEntity<Hall> getHallByName(@PathVariable("number") int number) {
+    public ResponseEntity<Hall> getHallByNumber(@PathVariable("number") int number) {
         Hall hall = this.hallRepository.findByNumber(number);
         if(hall == null){
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);

@@ -34,4 +34,11 @@ public class HallMGMTEventHandler {
             return new BookSeatResponse(request.getEventid(), request.getTicketid(), null);
         }
     }
+
+    @StreamListener(Channels.RESERVE_HALL)
+    @SendTo(Channels.RESERVED_HALL)
+    public int reserveHall(ReserveHallRequest request){
+        logger.info("received request for reserving hall number " + request.getHallNumber());
+        return eventHallService.reserveHall(request.getHallNumber(), request.getEventId());
+    }
 }

@@ -70,7 +70,7 @@ public class HallMgmtServiceApplication {
         return(args ->{
             eventHallRepository.deleteAll();
             Hall hall = hallRepository.findByNumber(1);
-            EventHall eventHall = new EventHall(hall);
+            EventHall eventHall = new EventHall(hall, 4);
             eventHallRepository.save(eventHall);
             logger.info("added event hall");
         });

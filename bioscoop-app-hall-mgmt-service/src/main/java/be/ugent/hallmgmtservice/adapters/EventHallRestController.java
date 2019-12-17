@@ -23,9 +23,9 @@ public class EventHallRestController {
         return this.eventHallRepository.findAll();
     }
 
-    @GetMapping("/{eventId}")
-    public ResponseEntity<EventHall> getEventHall(@PathVariable("eventId") int eventId){
-        EventHall hall = this.eventHallRepository.findByEventId(eventId);
+    @GetMapping("/{eventHallId}")
+    public ResponseEntity<EventHall> getEventHall(@PathVariable("eventHallId") int eventHallId){
+        EventHall hall = this.eventHallRepository.findByEventHallId(eventHallId);
         if(hall == null){
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
