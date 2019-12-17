@@ -27,9 +27,11 @@ public class HallMGMTEventHandler {
         logger.info("received request for booking seats for eventid " + request.getEventid());
         List<Seat> bookedSeats = eventHallService.bookSeats(request.getEventid(), request.getSeats());
         if(bookedSeats != null){
-            return new BookSeatResponse(request.getEventid(), bookedSeats);
+            logger.info("Seats booked for eventid " + request.getEventid());
+            bookedSeats.forEach(s -> logger.info("{} {}", "\tseatid:", s.getId()));
+            return new BookSeatResponse(request.getEventid(), request.getTicketid(), bookedSeats);
         }else{
-            return new BookSeatResponse(request.getEventid(), null);
+            return new BookSeatResponse(request.getEventid(), request.getTicketid(), null);
         }
     }
 }

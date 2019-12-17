@@ -9,6 +9,7 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class BookSeatRequest {
     private int eventid;
+    private int ticketid;
     private List<Seat> seats;
 
     public int getEventid() {
@@ -25,5 +26,13 @@ public class BookSeatRequest {
 
     public void setSeats(List<Seat> seats) {
         this.seats = seats;
+    }
+
+    public int getTicketid() {
+        return ticketid;
+    }
+
+    public void setTicketid(int ticketid) {
+        this.ticketid = ticketid;
     }
 }

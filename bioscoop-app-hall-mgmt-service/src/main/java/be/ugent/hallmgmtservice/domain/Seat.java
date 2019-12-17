@@ -2,7 +2,6 @@ package be.ugent.hallmgmtservice.domain;
 
 import org.springframework.data.annotation.Id;
 
-
 public class Seat {
 
     private long id;
