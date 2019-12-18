@@ -41,4 +41,16 @@ public class HallMGMTEventHandler {
         logger.info("received request for reserving hall number " + request.getHallNumber());
         return eventHallService.reserveHall(request.getHallNumber(), request.getEventId());
     }
+
+    @StreamListener(Channels.DELETE_BOOKED_SEATS)
+    public void deleteBookedSeats(DeleteBookedSeatRequest request){
+        logger.info("received request for deleting booked seats for eventid " + request.getEventid());
+        List<Seat> deletedSeats = eventHallService.deleteBookedSeats(request.getEventid(), request.getSeats());
+        if(deletedSeats != null){
+            logger.info("booked seats to delete for eventid" + request.getEventid());
+            deletedSeats.forEach(s -> logger.info("{} {}", "\tseatid:", s.getId()));
+        }else{
+            logger.info("There were no seats deleted");
+        }
+    }
 }

@@ -12,6 +12,9 @@ public interface Channels {
     static final String BOOK_SEATS = "book_seats";
     static final String BOOKED_SEATS = "booked_seats";
 
+    static final String DELETE_BOOKED_SEATS = "delete_booked_seats";
+    static final String BOOKED_SEATS_DELETED = "booked_seats_deleted";
+
     @Input(RESERVE_HALL)
     SubscribableChannel reserveHall();
 
@@ -23,4 +26,7 @@ public interface Channels {
 
     @Output(BOOKED_SEATS)
     MessageChannel bookedSeats();
+
+    @Input(DELETE_BOOKED_SEATS)
+    SubscribableChannel deleteBookedSeats();
 }

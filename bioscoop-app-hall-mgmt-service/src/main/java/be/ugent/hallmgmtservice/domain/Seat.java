@@ -39,10 +39,10 @@ public class Seat {
         this.rowNumber = rowNumber;
     }
 
-    public void setId(int row, int seat) {
+    private void setId(int row, int seat) {
         this.id = Long.parseLong(String.format("%02d%02d", rowNumber, seatNumber));
     }
-    public void setId(int row, int seat, int eventid) {
+    void setId(int row, int seat, int eventid) {
         this.id = Long.parseLong(String.format("%02d%02d%02d", rowNumber, seatNumber, eventid));
     }
 
