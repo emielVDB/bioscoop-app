@@ -23,5 +23,7 @@
         <module>bioscoop-app-tickets-service</module>
         <module>bioscoop-app-media-service</module>
         <module>bioscoop-app-staff-service</module>
+        <module>bioscoop-app-advertisement-schedule-service</module>
+
     </modules>
 </project>
