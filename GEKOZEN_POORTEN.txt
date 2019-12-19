@@ -4,3 +4,4 @@ ticketService: 2222
 schedule: 2223
 staff: 2224
 media: 2225
+advertisement: 2226

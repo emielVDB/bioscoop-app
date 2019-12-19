@@ -1,38 +1,48 @@
 package be.ugent.ticketsservice.domain;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @Entity
 public class Ticket {
 
-    // allereerst wordt er een createTicket uitgestuurd met de eventdetails en daarna worden de zetels opgevraagd die nog beschikbaar zijn en dan
-    // wordt het ticket geboekt
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long id;
+    private Long ticketid;
     private String name;
-    private int seatsNumber;
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "ticket",cascade = CascadeType.ALL)
+    private List<Seat> seats;
+    private int eventid;
     private int hallnumber;
     private String event;
     private LocalDate dateEvent;
-    //private List<Consumption> consumptions;
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "ticket",cascade = CascadeType.ALL)
+    private List<Consumption> consumptions;
 
     private LocalDate dateBooked; //Wanneer het ticket geboekt werd
     private double price;
-
+    private boolean booked;
     public Ticket() {
     }
 
-    public Ticket(String name, int seatsNumber, int hallnumber, String event, LocalDate dateEvent, double price) {
+    public Ticket(String name, List<Seat> seats, int hallnumber, String event,int eventid, LocalDate dateEvent, double price,List<Consumption> consumptions) {
         this.name=name;
-        this.seatsNumber=seatsNumber;
+        this.eventid=eventid;
         this.hallnumber=hallnumber;
         this.event=event;
         this.dateEvent=dateEvent;
         this.price=price;
+        this.seats=seats;
+        this.seats.forEach(x ->x.setTicket(this));
+        this.consumptions=consumptions;
+        this.consumptions.forEach(x ->x.setTicket(this));
+        this.booked=false;
     }
 
     public void setDateBooked(LocalDate dateBooked) {
@@ -41,10 +51,6 @@ public class Ticket {
 
     public String getName() {
         return name;
-    }
-
-    public int getSeatsNumber() {
-        return seatsNumber;
     }
 
     public int getHallnumber() {
@@ -65,5 +71,62 @@ public class Ticket {
 
     public double getPrice() {
         return price;
+    }
+    public List<Consumption> getConsumptions(){return consumptions;}
+
+    public void setConsumptions(List<Consumption> consumptions){
+        this.consumptions=consumptions;
+        this.consumptions.forEach(x ->x.setTicket(this));
+    }
+
+    public void setSeats(List<Seat> seats) {
+        if(this.getSeats()!=null){
+
+            for(int i=0;i<this.getSeats().size();i++) {
+                    this.getSeats().get(i).setRowNumber(seats.get(i).getRowNumber());
+                    this.getSeats().get(i).setSeatNumber(seats.get(i).getSeatNumber());
+
+            }
+        }
+        else{
+            this.seats=seats;
+            this.seats.forEach(x ->x.setTicket(this));
+        }
+    }
+
+    public List<Seat> getSeats() {
+        return seats;
+    }
+
+    public int getEventid() {
+        return eventid;
+    }
+
+    public Long getTicketid() {
+        return ticketid;
+    }
+
+    public boolean isBooked() {
+        return booked;
+    }
+
+    public void setBooked(boolean booked) {
+        this.booked = booked;
+    }
+
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "id=" + ticketid +
+                ", name='" + name + '\'' +
+                ", seats=" + seats +
+                ", eventid=" + eventid +
+                ", hallnumber=" + hallnumber +
+                ", event='" + event + '\'' +
+                ", dateEvent=" + dateEvent +
+                ", consumptions=" + consumptions +
+                ", dateBooked=" + dateBooked +
+                ", price=" + price +
+                '}';
     }
 }

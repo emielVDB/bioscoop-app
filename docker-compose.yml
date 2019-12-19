@@ -35,6 +35,18 @@ services:
     ports:
       - '3308:3306'
 
+  advertisementDB:
+    image: mysql:5.7
+    container_name: 'advertisement_sql_db'
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: advertisementDB
+    expose:
+      - '3310'
+    ports:
+      - '3310:3306'
+
   staffDB:
     image: mysql:5.7
     container_name: 'staff_sql_db'

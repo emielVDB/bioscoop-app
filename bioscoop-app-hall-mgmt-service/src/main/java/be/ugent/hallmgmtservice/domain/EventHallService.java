@@ -64,6 +64,24 @@ public class EventHallService {
         return null;
     }
 
+    public List<Seat> deleteBookedSeats(int eventHallId, List<Seat> seatsToDelete){
+        //find event
+        final EventHall h = eventHallRepository.findByEventHallId(eventHallId);
+        List<Seat> deletedSeats = new ArrayList<>();
+        if(h != null) {
+            for (Seat seatToDelete : seatsToDelete) {
+                Optional<Seat> s = h.getSeatById(seatToDelete.getId());
+                if (s.isPresent()) {
+                    s.get().setStatus(SeatStatus.AVAILABLE);
+                    deletedSeats.add(s.get());
+                }
+            }
+            eventHallRepository.save(h);
+            return deletedSeats;
+        }
+        return null;
+    }
+
     public int reserveHall(int hallNumber, int eventId) {
         Hall hall = hallRepository.findByNumber(hallNumber);
         if(hall != null){

@@ -37,6 +37,10 @@ public class Schedule {
     }
 
 
+    public int getEventId() {
+        return eventId;
+    }
+
     public EventType getEventType() {
         return eventType;
     }
