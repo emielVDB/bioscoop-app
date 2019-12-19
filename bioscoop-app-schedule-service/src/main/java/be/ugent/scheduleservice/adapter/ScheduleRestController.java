@@ -2,6 +2,7 @@ package be.ugent.scheduleservice.adapter;
 
 import be.ugent.scheduleservice.domain.Schedule;
 import be.ugent.scheduleservice.persistence.ScheduleRepository;
+import be.ugent.scheduleservice.service.AdvertisementTaskGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +17,24 @@ public class ScheduleRestController {
     @Autowired
     ScheduleRepository scheduleRepository;
 
+    @Autowired
+    AdvertisementTaskGenerator advertisementTaskGenerator;
+
     @GetMapping()
     public Iterable<Schedule> getAll()
     {
         return scheduleRepository.findAll();
+    }
+
+
+    //http://127.0.0.1:2223/schedule/test
+    @GetMapping("/test")
+    public ResponseEntity test()
+    {
+        String eventId="1";
+        String seconds="60";
+        String retValue=advertisementTaskGenerator.PostAdvertisementSlots(eventId,seconds);
+        return ResponseEntity.status(HttpStatus.CREATED).body(retValue);
     }
 
     //via -> http://127.0.0.1:2223/schedule/2018-11-02
@@ -47,12 +62,6 @@ public class ScheduleRestController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("A Movie was already planned");
         }
         scheduleRepository.save(schedule);
-
-
-
-
-
-
 
 
         return ResponseEntity.status(HttpStatus.CREATED).body("Successfully created");

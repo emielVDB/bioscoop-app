@@ -35,11 +35,13 @@ public class AdvertisementRestController {
     //via -> http://127.0.0.1:2226/advertisement/slots
     @PostMapping("/slots")
     //public Iterable<Schedule> postSchedule(@RequestBody Schedule schedule)
-    public ResponseEntity addAdvertisementSlots(@RequestBody int eventId)
+    public ResponseEntity addAdvertisementSlots(@RequestBody String eventId, String seconds)
+    //public ResponseEntity addAdvertisementSlots()
     {
 
         //return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("A Movie was already planned");
-        return ResponseEntity.status(HttpStatus.CREATED).body("Successfully created");
+        return ResponseEntity.status(HttpStatus.CREATED).body("Successfully created "+eventId+"  "+seconds);
+        //return ResponseEntity.status(HttpStatus.CREATED).body("Successfully created ");
     }
 
 
