@@ -35,6 +35,7 @@ public class BookTicketSaga {
         }
     }
     public void onSeatsBookedFailed(Ticket ticket){
+        //this.gateway.deleteBookedSeats(ticket); moet de catering zijn hier
         this.bookTicketFailed(ticket);
     }
     public void bookTicketFailed(Ticket ticket){

@@ -23,7 +23,7 @@ public class Seat {
         this.rowNumber=0;
     }
 
-    public int getSeatsNumber() {
+    public int getSeatNumber() {
         return seatNumber;
     }
 

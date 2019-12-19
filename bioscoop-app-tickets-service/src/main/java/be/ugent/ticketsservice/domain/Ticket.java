@@ -81,11 +81,11 @@ public class Ticket {
 
     public void setSeats(List<Seat> seats) {
         if(this.getSeats()!=null){
-            for(Seat s:this.getSeats()) {
-                for(Seat updateseat:seats) {
-                    s.setRowNumber(updateseat.getRowNumber());
-                    s.setSeatNumber(updateseat.getRowNumber());
-                }
+
+            for(int i=0;i<this.getSeats().size();i++) {
+                    this.getSeats().get(i).setRowNumber(seats.get(i).getRowNumber());
+                    this.getSeats().get(i).setSeatNumber(seats.get(i).getSeatNumber());
+
             }
         }
         else{
