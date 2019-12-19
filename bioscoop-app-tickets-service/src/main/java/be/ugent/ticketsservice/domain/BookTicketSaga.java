@@ -23,19 +23,34 @@ public class BookTicketSaga {
     public void startBookTicketSaga(Ticket ticket){
         logger.info("Book ticket saga started.");
         gateway.bookSeats(ticket);
+        if(!ticket.getConsumptions().isEmpty()){
+            //Het kopen van consumpties is optioneel en anders is er onnodige belasting van de catering service
+            gateway.bookConsumptions(ticket);
+        }
     }
     public void onSeatsBooked(Ticket ticket, List<Seat> seats){
         logger.info("OnSeatsBooked in bookTicketSaga");
         //set seats maakt niet uit zolang ze maar aan zelfde ticketid hangen
         ticket.setSeats(seats);
-        //Kijken of velden van consumption niet null zijn, enkel met id werken
-        if(ticket.getConsumptions().get(0).getName()!=null){
-            //Dan is het al geboekt bij catering service
+        if(ticket.getConsumptions().isEmpty() || !ticket.getConsumptions().get(0).getName().equals("")){
             this.ticketBookedComplete(ticket);
         }
     }
     public void onSeatsBookedFailed(Ticket ticket){
-        //this.gateway.deleteBookedSeats(ticket); moet de catering zijn hier
+        this.gateway.deleteBookedConsumptions(ticket);
+        this.bookTicketFailed(ticket);
+    }
+    public void onConsumptionsBooked(Ticket ticket,List<Consumption> consumptions){
+        logger.info("OnConsumptionsBooked in BookTicketSaga");
+        ticket.setConsumptions(consumptions);
+        if(ticket.getSeats().get(0).getRowNumber()!=0){
+            //Want 0 is de initiële waarde ingesteld in de restcontroller om te kunnen checken of het veranderd is
+            this.ticketBookedComplete(ticket);
+        }
+
+    }
+    public void onConsumptionsBookedFailed(Ticket ticket){
+        this.gateway.deleteBookedSeats(ticket);
         this.bookTicketFailed(ticket);
     }
     public void bookTicketFailed(Ticket ticket){

@@ -14,8 +14,6 @@ public class Consumption {
     private double price;
 
     public Consumption(){
-        name=null;
-        price=0;
     }
     public Consumption(String name, double price) {
         this.name = name;
@@ -31,6 +29,14 @@ public class Consumption {
     }
     public void setTicket(Ticket ticket){
         this.ticket=ticket;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     @Override
