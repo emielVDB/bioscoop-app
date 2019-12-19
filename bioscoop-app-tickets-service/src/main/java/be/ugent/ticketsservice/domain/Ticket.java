@@ -5,6 +5,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -40,8 +41,13 @@ public class Ticket {
         this.price=price;
         this.seats=seats;
         this.seats.forEach(x ->x.setTicket(this));
-        this.consumptions=consumptions;
-        this.consumptions.forEach(x ->x.setTicket(this));
+        if(consumptions==null){
+            this.consumptions=new ArrayList<>();
+        }
+        else {
+            this.consumptions=consumptions;
+            this.consumptions.forEach(x ->x.setTicket(this));
+        }
         this.booked=false;
     }
 
@@ -75,8 +81,22 @@ public class Ticket {
     public List<Consumption> getConsumptions(){return consumptions;}
 
     public void setConsumptions(List<Consumption> consumptions){
-        this.consumptions=consumptions;
-        this.consumptions.forEach(x ->x.setTicket(this));
+        //overlopen
+        if (this.getConsumptions()==null){
+            this.consumptions=consumptions;
+            this.consumptions.forEach(x ->x.setTicket(this));
+        }
+        else if (!consumptions.isEmpty()){
+            for(int i=0;i<this.getConsumptions().size();i++) {
+                this.getConsumptions().get(i).setName(consumptions.get(i).getName());
+                this.getConsumptions().get(i).setPrice(consumptions.get(i).getPrice());
+
+            }
+        }
+        else {
+            this.consumptions=consumptions;
+        }
+
     }
 
     public void setSeats(List<Seat> seats) {

@@ -12,6 +12,7 @@ import org.springframework.web.context.request.async.DeferredResult;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,17 +45,18 @@ public class TicketRestController implements BookTicketListener {
     }
     @PostMapping
     public DeferredResult<Ticket> bookTicket(@RequestBody Ticket ticket){
-        // Hier nog check doen bij management service of de stoelen nog beschikbaar zijn
-        // Ook nog mogelijke eten/drinken bestellen bij catering service
         logger.info("Ticket voor save");
         DeferredResult<Ticket> deferredResult=new DeferredResult<>(10000l);
         deferredResult.onTimeout(()->{
             deferredResult.setErrorResult("Timeout in request");
         });
         ticket.setDateBooked(LocalDate.now());
+        // We moeten weten of een van de 2 afhankelijke services al geantwoord heeft en doordat we in de messages enkel met ids van het ticket
+        //werken kunnen we een veldje van het Seat-object of Consumption-object wijzigen zodat we op die waarde kunnen checken. Als dit nog die waarde heeft
+        //is er nog niets van antwoord gekomen
+        makeObjectReadyToBeCheckedWhenFinishedByService(ticket);
         try{
             Ticket t=repository.save(ticket);
-            //Dan hier met het id doorwerken
             logger.info("Ticketid na save: " + t.getTicketid());
             this.deferredResultMap.put(t.getTicketid(),deferredResult);
             logger.info("Calling service in restcontroller to start book ticket saga");
@@ -70,8 +72,9 @@ public class TicketRestController implements BookTicketListener {
     private void performResponse(Ticket ticket){
         DeferredResult<Ticket> deferredResult=this.deferredResultMap.remove(ticket.getTicketid());
         if(deferredResult!=null && !deferredResult.isSetOrExpired()){
-            logger.info("PerformResponse response setting van een ticket: "+ ticket.getTicketid());
             deferredResult.setResult(ticket);
+            logger.info("PerformResponse response setting van een ticket geslaagd: "+ ticket.getTicketid());
+
         }
         else {
             logger.info("DeferredResult in performresponse: " +deferredResult);
@@ -80,5 +83,15 @@ public class TicketRestController implements BookTicketListener {
     @Override
     public void onBookTicketResult(Ticket ticket) {
         this.performResponse(ticket);
+    }
+
+    private void makeObjectReadyToBeCheckedWhenFinishedByService(Ticket ticket){
+        ticket.getSeats().get(0).setRowNumber(0);
+        if(ticket.getConsumptions()!=null && ticket.getConsumptions().size()>0){
+            ticket.getConsumptions().get(0).setName("");
+        }
+        if  (ticket.getConsumptions()==null){
+            ticket.setConsumptions(new ArrayList<>());
+        }
     }
 }
