@@ -1,7 +1,10 @@
 package be.ugent.hallmgmtservice.domain;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.Id;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Seat {
 
     private long id;
@@ -12,6 +15,13 @@ public class Seat {
 
     public Seat(){}
 
+    public Seat(int seatNumber,int rowNumber,long id,SeatType type,SeatStatus status){
+        this.seatNumber=seatNumber;
+        this.rowNumber=rowNumber;
+        this.id=id;
+        this.type=type;
+        this.status=status;
+    }
     public Seat(int seatNumber, int rowNumber, SeatType type, SeatStatus status) {
         this.setId(rowNumber, seatNumber);
         this.seatNumber = seatNumber;
@@ -39,6 +49,9 @@ public class Seat {
         this.rowNumber = rowNumber;
     }
 
+    public void setId(Long id){
+        this.id=id;
+    }
     private void setId(int row, int seat) {
         this.id = Long.parseLong(String.format("%02d%02d", rowNumber, seatNumber));
     }

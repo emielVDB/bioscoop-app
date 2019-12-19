@@ -1,7 +1,15 @@
 package be.ugent.ticketsservice.domain;
 
-public class Consumption {
+import javax.persistence.*;
 
+@Entity
+public class Consumption {
+    @Id
+    @GeneratedValue
+    private long id;
+    @ManyToOne
+    @JoinColumn
+    private Ticket ticket;
     private String name;
     private double price;
 
@@ -20,5 +28,16 @@ public class Consumption {
 
     public double getPrice() {
         return price;
+    }
+    public void setTicket(Ticket ticket){
+        this.ticket=ticket;
+    }
+
+    @Override
+    public String toString() {
+        return "Consumption{" +
+                "name='" + name + '\'' +
+                ", price=" + price +
+                '}';
     }
 }
