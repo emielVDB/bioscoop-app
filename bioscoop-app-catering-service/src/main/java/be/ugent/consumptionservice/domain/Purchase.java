@@ -13,14 +13,14 @@ public class Purchase {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long purchaseid;
     @LazyCollection(LazyCollectionOption.FALSE)
-    @OneToMany(mappedBy = "product",cascade = CascadeType.ALL)
-    private List<Product> products;
+    @OneToMany(mappedBy = "purchase",cascade = CascadeType.ALL)
+    private List<Item> items;
 
     public Purchase(){}
 
-    public Purchase(Long purchaseid, List<Product> products) {
+    public Purchase(List<Item> items) {
         this.purchaseid = purchaseid;
-        this.products = products;
+        this.items = items;
     }
 
     public Long getPurchaseid() {
@@ -31,11 +31,11 @@ public class Purchase {
         this.purchaseid = purchaseid;
     }
 
-    public List<Product> getProducts() {
-        return products;
+    public List<Item> getProducts() {
+        return items;
     }
 
-    public void setProducts(List<Product> products) {
-        this.products = products;
+    public void setProducts(List<Item> products) {
+        this.items = items;
     }
 }

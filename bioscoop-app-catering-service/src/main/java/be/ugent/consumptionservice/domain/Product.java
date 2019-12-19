@@ -1,6 +1,12 @@
 package be.ugent.consumptionservice.domain;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Product {
@@ -9,6 +15,9 @@ public class Product {
     private Long productid;
     private double price;
     private String name;
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<Item> items;
 
     public Product(){}
 
