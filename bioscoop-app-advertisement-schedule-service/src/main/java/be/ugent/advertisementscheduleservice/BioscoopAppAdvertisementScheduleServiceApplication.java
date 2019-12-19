@@ -26,8 +26,6 @@ public class BioscoopAppAdvertisementScheduleServiceApplication {
         return (args) ->{
             logger.info("Insert");
 
-            scheduleRepository.deleteAll();
-
 
         };
     }
