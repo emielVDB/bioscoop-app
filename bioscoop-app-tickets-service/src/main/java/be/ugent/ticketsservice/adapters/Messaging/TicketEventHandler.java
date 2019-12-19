@@ -30,4 +30,16 @@ public class TicketEventHandler {
             this.ticketService.seatsBooked(bookSeatResponse.getTicketid(),bookSeatResponse.getSeats());
         }
     }
+
+    @StreamListener(Channels.BOOKED_CONSUMPTIONS)
+    public void processBookedConsumptions(BookConsumptionResponse bookConsumptionResponse){
+        if(bookConsumptionResponse.getConsumptions()==null){
+            logger.info("Booked consumptions is null dus ticket boeken faalt");
+            this.ticketService.failedToBookConsumptions(bookConsumptionResponse.getTicketid());
+        }
+        else {
+            logger.info("BookConsumptionResponse is geslaagd");
+            this.ticketService.consumptionsBooked(bookConsumptionResponse.getTicketid(),bookConsumptionResponse.getConsumptions());
+        }
+    }
 }
