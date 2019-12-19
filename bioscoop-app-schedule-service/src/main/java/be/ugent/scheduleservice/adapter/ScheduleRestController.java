@@ -46,8 +46,15 @@ public class ScheduleRestController {
         {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("A Movie was already planned");
         }
-
         scheduleRepository.save(schedule);
+
+
+
+
+
+
+
+
         return ResponseEntity.status(HttpStatus.CREATED).body("Successfully created");
     }
 
