@@ -72,6 +72,7 @@ services:
       - '3307:3306'
 
   zookeeper:
+    container_name: 'zookeper'
     image: confluentinc/cp-zookeeper
     environment:
       - ZOOKEEPER_CLIENT_PORT=2181
@@ -79,17 +80,28 @@ services:
       - "2181:2181"
 
   kafka:
+    container_name: 'kafka'
     image: confluentinc/cp-kafka
     depends_on:
       - zookeeper
     environment:
       - KAFKA_BROKER_ID=1
       - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
-      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.99.100:9092
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
       - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
     ports:
       - "9092:9092"
-
+  gateway:
+    container_name: 'gateway'
+    build: ./bioscoop-app-api-gateway
+    links:
+      - schedule
+      - staff
+      - hall
+      - ticket
+      - media
+    ports:
+      - "3000:3000"
   staff:
     container_name: 'staff'
     build: ./bioscoop-app-staff-service
@@ -106,18 +118,49 @@ services:
     build: ./bioscoop-app-schedule-service
     links:
       - scheduleDB
+      - kafka
+      - zookeeper
     depends_on:
       - scheduleDB
+      - kafka
+      - zookeeper
     ports:
       - "2223:2223"
-  gateway:
-    container_name: 'gateway'
-    build: ./bioscoop-app-api-gateway
+  hall:
+    container_name: 'hall'
+    build: ./bioscoop-app-hall-mgmt-service
     links:
-      - schedule
-      - staff
+      - hallDB
+      - kafka
+      - zookeeper
+    depends_on:
+      - hallDB
+      - kafka
+      - zookeeper
     ports:
-      - "3000:3000"
+      - "2221:2221"
+  ticket:
+    container_name: 'ticket'
+    build: ./bioscoop-app-tickets-service
+    links:
+      - ticketDB
+      - kafka
+      - zookeeper
+    depends_on:
+      - ticketDB
+      - kafka
+      - zookeeper
+    ports:
+      - "2222:2222"
+  media:
+    container_name: 'media'
+    build: ./bioscoop-app-media-service
+    links:
+      - mediaDB
+    depends_on:
+      - mediaDB
+    ports:
+      - "2225:2225"
 
 volumes:
   mongo-volume:
