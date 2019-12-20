@@ -90,6 +90,35 @@ services:
     ports:
       - "9092:9092"
 
+  staff:
+    container_name: 'staff'
+    build: ./bioscoop-app-staff-service
+    links:
+      - staffDB
+      - schedule
+    depends_on:
+      - staffDB
+      - schedule
+    ports:
+      - "2224:2224"
+  schedule:
+    container_name: 'schedule'
+    build: ./bioscoop-app-schedule-service
+    links:
+      - scheduleDB
+    depends_on:
+      - scheduleDB
+    ports:
+      - "2223:2223"
+  gateway:
+    container_name: 'gateway'
+    build: ./bioscoop-app-api-gateway
+    links:
+      - schedule
+      - staff
+    ports:
+      - "3000:3000"
+
 volumes:
   mongo-volume:
 
