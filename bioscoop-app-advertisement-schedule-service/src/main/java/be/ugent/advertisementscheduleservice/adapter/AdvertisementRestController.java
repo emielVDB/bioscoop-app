@@ -1,7 +1,7 @@
 package be.ugent.advertisementscheduleservice.adapter;
 
-import be.ugent.advertisementscheduleservice.domain.Advertisement;
-import be.ugent.advertisementscheduleservice.persistence.AdvertisementRepository;
+import be.ugent.advertisementscheduleservice.domain.AdvertisementSlots;
+import be.ugent.advertisementscheduleservice.persistence.AdvertisementSlotsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,19 +13,19 @@ import org.springframework.web.bind.annotation.*;
 public class AdvertisementRestController {
 
     @Autowired
-    AdvertisementRepository advertisementRepository;
+    AdvertisementSlotsRepository advertisementSlotsRepository;
 
     //via -> http://127.0.0.1:2226/advertisement
     @GetMapping()
-    public Iterable<Advertisement> getAll()
+    public Iterable<AdvertisementSlots> getAll()
     {
-        return advertisementRepository.findAll();
+        return advertisementSlotsRepository.findAll();
     }
 
     //via -> http://127.0.0.1:2226/advertisement
     @PostMapping()
     //public Iterable<Schedule> postSchedule(@RequestBody Schedule schedule)
-    public ResponseEntity addAdvertisement(@RequestBody Advertisement advertisement)
+    public ResponseEntity addAdvertisement(@RequestBody AdvertisementSlots advertisement)
     {
 
         //return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("A Movie was already planned");

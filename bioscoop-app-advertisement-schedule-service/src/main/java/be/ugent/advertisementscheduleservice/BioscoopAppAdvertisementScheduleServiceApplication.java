@@ -1,7 +1,8 @@
 package be.ugent.advertisementscheduleservice;
 
-import be.ugent.advertisementscheduleservice.domain.Advertisement;
-import be.ugent.advertisementscheduleservice.persistence.AdvertisementRepository;
+import be.ugent.advertisementscheduleservice.domain.AdvertisementSlots;
+import be.ugent.advertisementscheduleservice.domain.ReservedAdvertisements;
+import be.ugent.advertisementscheduleservice.persistence.AdvertisementSlotsRepository;
 import org.slf4j.Logger;
 
 import org.slf4j.LoggerFactory;
@@ -10,7 +11,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import java.sql.Timestamp;
+import java.util.Set;
 
 @SpringBootApplication
 public class BioscoopAppAdvertisementScheduleServiceApplication {
@@ -22,25 +23,20 @@ public class BioscoopAppAdvertisementScheduleServiceApplication {
 
 
     @Bean
-    public CommandLineRunner populateDatabase(AdvertisementRepository advertisementRepository) {
+    public CommandLineRunner populateDatabase(AdvertisementSlotsRepository advertisementSlotsRepository) {
         return (args) ->{
             logger.info("Insert");
 
-            advertisementRepository.deleteAll();
+            advertisementSlotsRepository.deleteAll();
 
-            Timestamp beginTime=Timestamp.valueOf("2018-09-01 09:01:15");
-            Timestamp endTime= Timestamp.valueOf("2018-09-01 09:01:50");
-            Advertisement advertisement =new Advertisement(1,beginTime,endTime,1);
 
-            advertisementRepository.save(advertisement);
+            advertisementSlotsRepository.save(new AdvertisementSlots(1,2,new ReservedAdvertisements(1),new ReservedAdvertisements(5)));
 
 
             logger.info("Data in de DB");
-            for (Advertisement s: advertisementRepository.findAll())
+            for (AdvertisementSlots s: advertisementSlotsRepository.findAll())
             {
                 logger.info(s.getEventId()+"");
-                logger.info(s.getMediaId()+"");
-
             }
 
         };
