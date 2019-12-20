@@ -1,5 +1,7 @@
 package be.ugent.scheduleservice;
 
+import be.ugent.scheduleservice.adapter.messaging.Channels;
+import be.ugent.scheduleservice.adapter.messaging.MessageGateway;
 import be.ugent.scheduleservice.domain.EventType;
 import be.ugent.scheduleservice.domain.Schedule;
 import be.ugent.scheduleservice.persistence.ScheduleRepository;
@@ -8,13 +10,16 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.context.annotation.Bean;
+import org.springframework.integration.annotation.Gateway;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
 @SpringBootApplication
+@EnableBinding(Channels.class)
 public class BioscoopAppScheduleServiceApplication {
     private static Logger logger= LoggerFactory.getLogger(BioscoopAppScheduleServiceApplication.class);
 
@@ -22,7 +27,7 @@ public class BioscoopAppScheduleServiceApplication {
         SpringApplication.run(BioscoopAppScheduleServiceApplication.class, args);
     }
 
-    @Bean
+    /*@Bean
     public CommandLineRunner populateDatabase(ScheduleRepository scheduleRepository) {
         return (args) ->{
             logger.info("Insert");
@@ -64,7 +69,16 @@ public class BioscoopAppScheduleServiceApplication {
 
 
         };
-    }
+    }*/
 
+
+    /*@Bean
+    public CommandLineRunner testGateway(MessageGateway messageGateway, ScheduleRepository scheduleRepository){
+        return (args) -> {
+
+            logger.info("TEST KAFKA");
+
+        };
+    }*/
 
 }
