@@ -1,4 +1,4 @@
-package be.ugent.hallmgmtservice.adapters;
+package be.ugent.hallmgmtservice.adapters.rest;
 
 import be.ugent.hallmgmtservice.domain.EventHall;
 import be.ugent.hallmgmtservice.persistence.EventHallRepository;
