@@ -44,6 +44,11 @@ public class OrderConsumptionEventHandler {
 
     @StreamListener(Channels.DELETE_ORDERED_CONSUMPTIONS)
     public void deleteOrderedConsumptions(OrderConsumptions request){
-
+        logger.info("Reveived request to delete a purchase with purchaseid {}", request.getPurchaseid());
+        if(request.getPurchaseid() > 0){
+            cateringService.deletePurchase(request.getPurchaseid());
+        }else{
+            logger.info("No purchaseId found");
+        }
     }
 }

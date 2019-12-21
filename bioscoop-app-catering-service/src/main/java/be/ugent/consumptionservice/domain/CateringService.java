@@ -70,4 +70,9 @@ public class CateringService {
         return orderedConsumptions;
     }
 
+    public void deletePurchase(Long purchaseId){
+        Optional<Purchase> purchase = purchaseRepository.findById(purchaseId);
+        purchase.ifPresent(purchaseRepository::delete);
+    }
+
 }
