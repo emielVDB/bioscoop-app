@@ -32,6 +32,13 @@ public class TicketService {
             this.bookTicketSaga.onSeatsBooked(ticket.get(),seats);
             this.repository.save(ticket.get());
         }
+        else {
+            //Komt voor als book seats slaagt maar de consumptions konden niet geboekt worden
+            logger.info("Book seats wordt teniet gedaan");
+            Ticket ticketSeats=new Ticket();
+            ticketSeats.setSeats(seats);
+            this.bookTicketSaga.deleteSeatsTicketGone(ticketSeats);
+        }
     }
     public synchronized void failedToBookSeats(Long id){
         Optional<Ticket> ticket=this.repository.findById(id);
@@ -42,11 +49,18 @@ public class TicketService {
         }
     }
 
-    public synchronized void consumptionsBooked(Long id,List<Consumption> consumptions){
+    public synchronized void consumptionsBooked(Long id,List<Consumption> consumptions,Long purchaseid){
         Optional<Ticket> ticket=this.repository.findById(id);
         if(ticket.isPresent()) {
+            ticket.get().setPurchaseid(purchaseid);
             this.bookTicketSaga.onConsumptionsBooked(ticket.get(), consumptions);
             this.repository.save(ticket.get());
+        }
+        else {
+            logger.info("Book consumptions wordt teniet gedaan");
+            Ticket ticketConsumptions=new Ticket();
+            ticketConsumptions.setPurchaseid(purchaseid);
+            this.bookTicketSaga.deleteConsumptionsTicketGone(ticketConsumptions);
         }
     }
     public synchronized void failedToBookConsumptions(Long id){

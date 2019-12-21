@@ -39,7 +39,7 @@ public class TicketEventHandler {
         }
         else {
             logger.info("BookConsumptionResponse is geslaagd");
-            this.ticketService.consumptionsBooked(bookConsumptionResponse.getTicketid(),bookConsumptionResponse.getConsumptions());
+            this.ticketService.consumptionsBooked(bookConsumptionResponse.getTicketid(),bookConsumptionResponse.getConsumptions(),bookConsumptionResponse.getPurchaseid());
         }
     }
 }

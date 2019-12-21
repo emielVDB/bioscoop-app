@@ -36,6 +36,13 @@ public class BookTicketSaga {
             this.ticketBookedComplete(ticket);
         }
     }
+
+    public void deleteConsumptionsTicketGone(Ticket ticket){
+        this.gateway.deleteBookedConsumptions(ticket);
+    }
+    public void deleteSeatsTicketGone(Ticket ticket){
+        this.gateway.deleteBookedSeats(ticket);
+    }
     public void onSeatsBookedFailed(Ticket ticket){
         this.gateway.deleteBookedConsumptions(ticket);
         this.bookTicketFailed(ticket);

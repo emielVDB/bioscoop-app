@@ -25,14 +25,14 @@ public class Ticket {
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "ticket",cascade = CascadeType.ALL)
     private List<Consumption> consumptions;
-
+    private Long purchaseid;
     private LocalDate dateBooked; //Wanneer het ticket geboekt werd
     private double price;
     private boolean booked;
     public Ticket() {
     }
 
-    public Ticket(String name, List<Seat> seats, int hallnumber, String event,int eventid, LocalDate dateEvent, double price,List<Consumption> consumptions) {
+    public Ticket(String name, List<Seat> seats, int hallnumber, String event, int eventid, LocalDate dateEvent, double price, List<Consumption> consumptions) {
         this.name=name;
         this.eventid=eventid;
         this.hallnumber=hallnumber;
@@ -132,6 +132,14 @@ public class Ticket {
 
     public void setBooked(boolean booked) {
         this.booked = booked;
+    }
+
+    public Long getPurchaseid() {
+        return purchaseid;
+    }
+
+    public void setPurchaseid(Long purchaseid) {
+        this.purchaseid = purchaseid;
     }
 
     @Override
