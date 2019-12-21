@@ -2,15 +2,12 @@ package be.ugent.consumptionservice.adapters;
 
 import be.ugent.consumptionservice.ConsumptionServiceApplication;
 import be.ugent.consumptionservice.domain.CateringService;
-import be.ugent.consumptionservice.domain.Product;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class OrderConsumptionEventHandler {
@@ -29,12 +26,19 @@ public class OrderConsumptionEventHandler {
         if(!request.getConsumptions().isEmpty()){
             logger.info("consumptions: ", request.getConsumptions());
             //purchase aanmaken en in de database steken
-            List<Product> orderedProducts = cateringService.orderConsumptions(request.getConsumptions());
-            if(!orderedProducts.isEmpty()){
-                return new OrderConsumptions(request.getTicketid(), request.getEventid(), orderedProducts);
+            OrderConsumptions orderedConsumptions = cateringService.orderConsumptions(request.getConsumptions());
+            if(orderedConsumptions != null){
+                orderedConsumptions.setEventid(request.getEventid());
+                orderedConsumptions.setTicketid(request.getTicketid());
+                return orderedConsumptions;
             }
         }
         //when the order list was empty or the CateringService returns null, no consumptions were ordered
         return null;
+    }
+
+    @StreamListener(Channels.DELETE_ORDERED_CONSUMPTIONS)
+    public void deleteOrderedConsumptions(OrderConsumptions request){
+
     }
 }

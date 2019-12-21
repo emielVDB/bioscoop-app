@@ -14,10 +14,21 @@ public class OrderConsumptions {
     private long purchaseid;
     private List<Product> consumptions;
 
-    public OrderConsumptions(int ticketid, int eventid, List<Product> consumptions) {
+    public OrderConsumptions(){}
+
+    public OrderConsumptions(int ticketid, int eventid, long purchaseid, List<Product> consumptions) {
         this.ticketid = ticketid;
         this.eventid = eventid;
+        this.purchaseid = purchaseid;
         this.consumptions = consumptions;
+    }
+
+    public long getPurchaseid() {
+        return purchaseid;
+    }
+
+    public void setPurchaseid(long purchaseid) {
+        this.purchaseid = purchaseid;
     }
 
     public int getTicketid() {

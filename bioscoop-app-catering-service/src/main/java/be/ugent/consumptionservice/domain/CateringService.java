@@ -1,6 +1,7 @@
 package be.ugent.consumptionservice.domain;
 
 import be.ugent.consumptionservice.ConsumptionServiceApplication;
+import be.ugent.consumptionservice.adapters.OrderConsumptions;
 import be.ugent.consumptionservice.persistence.ItemRepository;
 import be.ugent.consumptionservice.persistence.ProductRepository;
 import be.ugent.consumptionservice.persistence.PurchaseRepository;
@@ -31,19 +32,24 @@ public class CateringService {
         this.purchaseRepository = purchaseRepository;
     }
 
-    public List<Product> orderConsumptions(List<Product> products){
+    public OrderConsumptions orderConsumptions(List<Product> products){
         Purchase purchase = new Purchase();
         List<Item> items = new ArrayList<>();
+        OrderConsumptions orderedConsumptions = new OrderConsumptions();
         List<Product> orderedProducts = new ArrayList<>();
         purchase = purchaseRepository.save(purchase);
         logger.info("CateringService at your service...");
         //check if the ordered products exist in our catalog
         for(Product p : products){
-            logger.info("productname " + p.getName());
-//            Optional<Product> thisProduct = productRepository.findById(p.getProductid());
-            Optional<Product> thisProduct = null;
-            if(thisProduct.isPresent()){
-                orderedProducts.add(thisProduct.get());
+            if(p.getProductid() > 0){
+                logger.info("productname " + p.getName());
+                Optional<Product> thisProduct = productRepository.findById(p.getProductid());
+                if(thisProduct.isPresent()){
+                    orderedProducts.add(thisProduct.get());
+                }else{
+                    //when one of the products doesn't exist, the order proccess is stoped
+                    return null;
+                }
             }else{
                 //when one of the products doesn't exist, the order proccess is stoped
                 return null;
@@ -58,9 +64,10 @@ public class CateringService {
         }
         purchase.setProducts(items);
         purchaseRepository.save(purchase);
-
+        orderedConsumptions.setConsumptions(orderedProducts);
+        orderedConsumptions.setPurchaseid(purchase.getPurchaseid());
         //return the ordered products
-        return orderedProducts;
+        return orderedConsumptions;
     }
 
 }

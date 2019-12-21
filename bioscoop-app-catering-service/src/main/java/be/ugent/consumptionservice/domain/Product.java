@@ -15,7 +15,7 @@ public class Product {
 
     @Id
     @JsonProperty("productid")
-    private long productid;
+    private long productid = -1L;
     private double price;
     @JsonProperty("name")
     private String name;
