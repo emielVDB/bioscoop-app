@@ -63,5 +63,4 @@ public class CateringService {
         return orderedProducts;
     }
 
-    public void delete
 }
