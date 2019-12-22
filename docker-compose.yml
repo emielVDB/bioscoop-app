@@ -173,6 +173,40 @@ services:
       - mediaDB
     ports:
       - "2225:2225"
+  advertisement:
+    container_name: 'advertisement'
+    build: ./bioscoop-app-advertisement-schedule-service
+    links:
+      - advertisementDB
+    depends_on:
+      - advertisementDB
+    ports:
+      - "2226:2226"
+  catering:
+    container_name: 'catering'
+    build: ./bioscoop-app-catering-service
+    links:
+      - cateringDB
+      - kafka
+      - zookeeper
+    depends_on:
+      - cateringDB
+      - kafka
+      - zookeeper
+    ports:
+      - "2227:2227"
+  statistics:
+    container_name: 'statistics'
+    build: ./bioscoop-app-statistics-service
+    links:
+      - kafka
+      - zookeeper
+    depends_on:
+      - kafka
+      - zookeeper
+    ports:
+      - "2228:2228"
+
 
 volumes:
   mongo-volume:

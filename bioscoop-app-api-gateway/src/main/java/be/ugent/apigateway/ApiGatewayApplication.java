@@ -26,6 +26,14 @@ public class ApiGatewayApplication {
                 .route(r -> r.host("*").and().path("/staff/**").uri("http://staff:2224"))
                 // media service routes
                 .route(r -> r.host("*").and().path("/media/**").uri("http://media:2225"))
+                // advertisement service routes
+                .route(r -> r.host("*").and().path("/advertisement/**").uri("http://advertisement:2226"))
+                // catering service routes
+                .route(r -> r.host("*").and().path("/catering/**").uri("http://catering:2227"))
+                // statistics service routes
+                .route(r -> r.host("*").and().path("/statistics/**").uri("http://statistics:2228"))
+
+
 
                 // it is also possible to give independent paths:
                 // .route(r ->
