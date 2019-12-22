@@ -19,7 +19,7 @@ public interface MessageGateway {
 
 }*/
 
-
+/*
 
 @MessagingGateway
 public interface MessageGateway {
@@ -40,4 +40,4 @@ public interface MessageGateway {
     public void bookingTicketCompleted(Schedule schedule);
 
 
-}
+}*/

@@ -1,7 +1,7 @@
 package be.ugent.scheduleservice;
 
 import be.ugent.scheduleservice.adapter.messaging.Channels;
-import be.ugent.scheduleservice.adapter.messaging.MessageGateway;
+//import be.ugent.scheduleservice.adapter.messaging.MessageGateway;
 import be.ugent.scheduleservice.domain.EventType;
 import be.ugent.scheduleservice.domain.Schedule;
 import be.ugent.scheduleservice.persistence.ScheduleRepository;

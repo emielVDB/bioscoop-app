@@ -31,10 +31,10 @@ public class ScheduleRestController {
     @GetMapping("/test")
     public ResponseEntity test()
     {
-        String eventId="1";
+        /*String eventId="1";
         String seconds="60";
-        String retValue=advertisementTaskGenerator.PostAdvertisementSlots(eventId,seconds);
-        return ResponseEntity.status(HttpStatus.CREATED).body(retValue);
+        String retValue=advertisementTaskGenerator.PostAdvertisementSlots(eventId,seconds);*/
+        return ResponseEntity.status(HttpStatus.CREATED).body("");
     }
 
     //via -> http://127.0.0.1:2223/schedule/2018-11-02
