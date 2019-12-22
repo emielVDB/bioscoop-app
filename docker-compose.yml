@@ -71,6 +71,18 @@ services:
     ports:
       - '3307:3306'
 
+  cateringDB:
+    image: mysql:5.7
+    container_name: 'catering_sql_db'
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: cateringDB
+    expose:
+      - "3306"
+    ports:
+      - '3306:3306'
+
   zookeeper:
     container_name: 'zookeper'
     image: confluentinc/cp-zookeeper

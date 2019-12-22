@@ -12,14 +12,14 @@ public class Consumption {
     private Ticket ticket;
     private String name;
     private double price;
+    private Long productid;
 
     public Consumption(){
-        name=null;
-        price=0;
     }
-    public Consumption(String name, double price) {
+    public Consumption(String name, double price,Long productid) {
         this.name = name;
         this.price = price;
+        this.productid=productid;
     }
 
     public String getName() {
@@ -33,11 +33,28 @@ public class Consumption {
         this.ticket=ticket;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public Long getProductid() {
+        return productid;
+    }
+
+    public void setProductid(Long productid) {
+        this.productid = productid;
+    }
+
     @Override
     public String toString() {
         return "Consumption{" +
                 "name='" + name + '\'' +
                 ", price=" + price +
+                ", productid=" + productid +
                 '}';
     }
 }
