@@ -2,6 +2,7 @@ package be.ugent.scheduleservice;
 
 import be.ugent.scheduleservice.adapter.messaging.Channels;
 //import be.ugent.scheduleservice.adapter.messaging.MessageGateway;
+import be.ugent.scheduleservice.adapter.messaging.MessageGateway;
 import be.ugent.scheduleservice.domain.EventType;
 import be.ugent.scheduleservice.domain.Schedule;
 import be.ugent.scheduleservice.persistence.ScheduleRepository;
@@ -72,13 +73,21 @@ public class BioscoopAppScheduleServiceApplication {
     }*/
 
 
-    /*@Bean
+    @Bean
     public CommandLineRunner testGateway(MessageGateway messageGateway, ScheduleRepository scheduleRepository){
         return (args) -> {
 
+
+            LocalDateTime date=LocalDateTime.of(2018,11,2,5,0,0);
+            LocalDateTime endDate=LocalDateTime.of(2018,11,2,7,0,0);
+            Schedule schedule =new Schedule(date,endDate,10,6,EventType.FILM);
+
+            messageGateway.addAdvertisementSlots(schedule);
+
+            //messageGateway.addAdvertisementSlots();
             logger.info("TEST KAFKA");
 
         };
-    }*/
+    }
 
 }

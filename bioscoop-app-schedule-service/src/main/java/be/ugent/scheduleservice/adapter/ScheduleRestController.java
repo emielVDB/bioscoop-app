@@ -1,5 +1,7 @@
 package be.ugent.scheduleservice.adapter;
 
+import be.ugent.scheduleservice.adapter.messaging.MessageGateway;
+import be.ugent.scheduleservice.domain.EventType;
 import be.ugent.scheduleservice.domain.Schedule;
 import be.ugent.scheduleservice.persistence.ScheduleRepository;
 import be.ugent.scheduleservice.service.AdvertisementTaskGenerator;
@@ -8,7 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("schedule")
@@ -16,9 +18,44 @@ import java.time.LocalDate;
 public class ScheduleRestController {
     @Autowired
     ScheduleRepository scheduleRepository;
+    //@Autowired
+    //AdvertisementTaskGenerator advertisementTaskGenerator;
 
+
+    private final MessageGateway messageGateway;
     @Autowired
-    AdvertisementTaskGenerator advertisementTaskGenerator;
+    public ScheduleRestController(MessageGateway messageGateway) {
+        this.messageGateway = messageGateway;
+    }
+
+
+
+
+    //http://127.0.0.1:2223/schedule/test
+    //POST TEST
+    /*@GetMapping("/test")
+    public ResponseEntity test()
+    {
+        String eventId="1";
+        String seconds="60";
+        String retValue=advertisementTaskGenerator.PostAdvertisementSlots(eventId,seconds);
+        return ResponseEntity.status(HttpStatus.CREATED).body("");
+    }*/
+
+
+
+
+    @GetMapping("/test")
+    public ResponseEntity test()
+    {
+        LocalDateTime date=LocalDateTime.of(2018,11,2,5,0,0);
+        LocalDateTime endDate=LocalDateTime.of(2018,11,2,7,0,0);
+        Schedule schedule =new Schedule(date,endDate,10,6, EventType.FILM);
+
+        messageGateway.addAdvertisementSlots(schedule);
+        return ResponseEntity.status(HttpStatus.CREATED).body("OKE");
+    }
+
 
     @GetMapping()
     public Iterable<Schedule> getAll()
@@ -26,16 +63,6 @@ public class ScheduleRestController {
         return scheduleRepository.findAll();
     }
 
-
-    //http://127.0.0.1:2223/schedule/test
-    @GetMapping("/test")
-    public ResponseEntity test()
-    {
-        /*String eventId="1";
-        String seconds="60";
-        String retValue=advertisementTaskGenerator.PostAdvertisementSlots(eventId,seconds);*/
-        return ResponseEntity.status(HttpStatus.CREATED).body("");
-    }
 
     //via -> http://127.0.0.1:2223/schedule/2018-11-02
     @GetMapping("/{datum}")
@@ -56,14 +83,19 @@ public class ScheduleRestController {
         String endTime="2018-11-02 10:00:00";
         int zaalNmr=11;*/
 
+
+
         Iterable<Schedule> sch=scheduleRepository.getMoviesAtTimeAndHall(schedule.getBeginDate().toString(),schedule.getEndDate().toString(),schedule.getZaalNmr());
         if(sch.iterator().hasNext())
         {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("A Movie was already planned");
         }
+
+        messageGateway.BookHall(schedule);
+
         scheduleRepository.save(schedule);
-
-
+        int seconds=200;
+        messageGateway.addAdvertisementSlots(schedule,seconds);
         return ResponseEntity.status(HttpStatus.CREATED).body("Successfully created");
     }
 
