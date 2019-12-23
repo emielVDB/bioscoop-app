@@ -1,5 +1,6 @@
 package be.ugent.advertisementscheduleservice;
 
+import be.ugent.advertisementscheduleservice.adapter.messaging.Channels;
 import be.ugent.advertisementscheduleservice.domain.AdvertisementSlots;
 import be.ugent.advertisementscheduleservice.domain.ReservedAdvertisements;
 import be.ugent.advertisementscheduleservice.persistence.AdvertisementSlotsRepository;
@@ -9,11 +10,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.stream.annotation.EnableBinding;
+
 import org.springframework.context.annotation.Bean;
 
 import java.util.Set;
 
 @SpringBootApplication
+@EnableBinding(Channels.class)
 public class BioscoopAppAdvertisementScheduleServiceApplication {
     private static Logger logger= LoggerFactory.getLogger(BioscoopAppAdvertisementScheduleServiceApplication.class);
 

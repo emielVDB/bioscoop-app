@@ -1,8 +1,7 @@
 package be.ugent.scheduleservice.service;
 
 import be.ugent.scheduleservice.persistence.ScheduleRepository;
-import org.json.JSONException;
-import org.json.JSONObject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -23,7 +22,7 @@ public class AdvertisementTaskGenerator {
     @Autowired
     ScheduleRepository scheduleRepository;
 
-    @Value("${advertisement.url}")
+    /*@Value("${advertisement.url}")
     private String advertisementUrl;
 
     public String getAdvertisementUrl(){
@@ -53,5 +52,5 @@ public class AdvertisementTaskGenerator {
             e.printStackTrace();
         }
         return "Failed";
-    }
+    }*/
 }
