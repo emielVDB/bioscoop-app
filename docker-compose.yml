@@ -1,8 +1,8 @@
 version: '3'
 services:
-  hallDB:
+  halldb:
     image: 'mongo'
-    container_name: 'hall_mongo_db'
+    container_name: 'halldb'
     environment:
       # provide your credentials here
       - MONGO_INITDB_ROOT_USERNAME=root
@@ -12,9 +12,9 @@ services:
     ports:
       - '27017:27017'
 
-  mediaDB:
+  mediadb:
     image: 'mongo'
-    container_name: 'media_mongo_db'
+    container_name: 'mediadb'
     environment:
       # provide your credentials here
       - MONGO_INITDB_ROOT_USERNAME=root
@@ -23,61 +23,61 @@ services:
     ports:
       - '27020:27017'
 
-  scheduleDB:
+  scheduledb:
     image: mysql:5.7
-    container_name: 'schedule_sql_db'
+    container_name: 'scheduledb'
     command: --default-authentication-plugin=mysql_native_password
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: scheduleDB
+      MYSQL_DATABASE: scheduledb
     expose:
       - '3308'
     ports:
       - '3308:3306'
 
-  advertisementDB:
+  advertisementdb:
     image: mysql:5.7
-    container_name: 'advertisement_sql_db'
+    container_name: 'advertisementdb'
     command: --default-authentication-plugin=mysql_native_password
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: advertisementDB
+      MYSQL_DATABASE: advertisementdb
     expose:
       - '3310'
     ports:
       - '3310:3306'
 
-  staffDB:
+  staffdb:
     image: mysql:5.7
-    container_name: 'staff_sql_db'
+    container_name: 'staffdb'
     command: --default-authentication-plugin=mysql_native_password
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: staffDB
+      MYSQL_DATABASE: staffdb
     expose:
       - '3309'
     ports:
       - '3309:3306'
 
-  ticketDB:
+  ticketdb:
     image: mysql:5.7
-    container_name: 'ticket_sql_db'
+    container_name: 'ticketdb'
     command: --default-authentication-plugin=mysql_native_password
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: ticketDB
+      MYSQL_DATABASE: ticketdb
     expose:
       - "3307"
     ports:
       - '3307:3306'
 
-  cateringDB:
+  cateringdb:
     image: mysql:5.7
-    container_name: 'catering_sql_db'
+    container_name: 'cateringdb'
     command: --default-authentication-plugin=mysql_native_password
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: cateringDB
+      MYSQL_DATABASE: cateringdb
     expose:
       - "3306"
     ports:
@@ -118,10 +118,10 @@ services:
     container_name: 'staff'
     build: ./bioscoop-app-staff-service
     links:
-      - staffDB
+      - staffdb
       - schedule
     depends_on:
-      - staffDB
+      - staffdb
       - schedule
     ports:
       - "2224:2224"
@@ -129,11 +129,11 @@ services:
     container_name: 'schedule'
     build: ./bioscoop-app-schedule-service
     links:
-      - scheduleDB
+      - scheduledb
       - kafka
       - zookeeper
     depends_on:
-      - scheduleDB
+      - scheduledb
       - kafka
       - zookeeper
     ports:
@@ -142,11 +142,11 @@ services:
     container_name: 'hall'
     build: ./bioscoop-app-hall-mgmt-service
     links:
-      - hallDB
+      - halldb
       - kafka
       - zookeeper
     depends_on:
-      - hallDB
+      - halldb
       - kafka
       - zookeeper
     ports:
@@ -155,11 +155,11 @@ services:
     container_name: 'ticket'
     build: ./bioscoop-app-tickets-service
     links:
-      - ticketDB
+      - ticketdb
       - kafka
       - zookeeper
     depends_on:
-      - ticketDB
+      - ticketdb
       - kafka
       - zookeeper
     ports:
@@ -168,29 +168,29 @@ services:
     container_name: 'media'
     build: ./bioscoop-app-media-service
     links:
-      - mediaDB
+      - mediadb
     depends_on:
-      - mediaDB
+      - mediadb
     ports:
       - "2225:2225"
   advertisement:
     container_name: 'advertisement'
     build: ./bioscoop-app-advertisement-schedule-service
     links:
-      - advertisementDB
+      - advertisementdb
     depends_on:
-      - advertisementDB
+      - advertisementdb
     ports:
       - "2226:2226"
   catering:
     container_name: 'catering'
     build: ./bioscoop-app-catering-service
     links:
-      - cateringDB
+      - cateringdb
       - kafka
       - zookeeper
     depends_on:
-      - cateringDB
+      - cateringdb
       - kafka
       - zookeeper
     ports:
