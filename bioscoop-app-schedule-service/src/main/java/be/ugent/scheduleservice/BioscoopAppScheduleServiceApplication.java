@@ -82,7 +82,8 @@ public class BioscoopAppScheduleServiceApplication {
             LocalDateTime endDate=LocalDateTime.of(2018,11,2,7,0,0);
             Schedule schedule =new Schedule(date,endDate,10,6,EventType.FILM);
 
-            messageGateway.addAdvertisementSlots(schedule);
+            int seconds=600;
+            //messageGateway.addAdvertisementSlots(schedule,seconds);
 
             //messageGateway.addAdvertisementSlots();
             logger.info("TEST KAFKA");

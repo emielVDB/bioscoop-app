@@ -52,7 +52,8 @@ public class ScheduleRestController {
         LocalDateTime endDate=LocalDateTime.of(2018,11,2,7,0,0);
         Schedule schedule =new Schedule(date,endDate,10,6, EventType.FILM);
 
-        messageGateway.addAdvertisementSlots(schedule);
+
+        //messageGateway.addAdvertisementSlots(schedule);
         return ResponseEntity.status(HttpStatus.CREATED).body("OKE");
     }
 
