@@ -1,5 +1,7 @@
 package be.ugent.hallmgmtservice.domain;
 
+import org.springframework.context.annotation.Primary;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.text.SimpleDateFormat;

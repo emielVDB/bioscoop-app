@@ -93,4 +93,14 @@ public class EventHallService {
             return -1;
         }
     }
+
+    public int deleteReservedHall(int eventId) {
+        EventHall hall = eventHallRepository.findByEventHallId(eventId);
+        if(hall != null){
+            eventHallRepository.delete(hall);
+            return hall.getEventHallId();
+        }else{
+            return -1;
+        }
+    }
 }

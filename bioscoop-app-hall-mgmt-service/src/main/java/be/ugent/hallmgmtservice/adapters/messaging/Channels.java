@@ -6,8 +6,10 @@ import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.SubscribableChannel;
 
 public interface Channels {
-    static final String RESERVE_HALL = "reserve_hall";
-    static final String RESERVED_HALL = "reserved_hall";
+    static final String RESERVE_HALL = "BookHall";
+    static final String RESERVED_HALL = "BookHallReply";
+
+    static final String DELETE_RESERVED_HALL = "RemoveBookedHall";
 
     static final String BOOK_SEATS = "book_seats";
     static final String BOOKED_SEATS = "booked_seats";
@@ -29,4 +31,7 @@ public interface Channels {
 
     @Input(DELETE_BOOKED_SEATS)
     SubscribableChannel deleteBookedSeats();
+
+    @Input(DELETE_RESERVED_HALL)
+    SubscribableChannel deleteReservedHall();
 }
