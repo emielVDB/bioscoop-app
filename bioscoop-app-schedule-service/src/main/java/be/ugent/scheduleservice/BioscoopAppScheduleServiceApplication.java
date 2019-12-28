@@ -5,6 +5,7 @@ import be.ugent.scheduleservice.adapter.messaging.Channels;
 import be.ugent.scheduleservice.adapter.messaging.MessageGateway;
 import be.ugent.scheduleservice.domain.EventType;
 import be.ugent.scheduleservice.domain.Schedule;
+import be.ugent.scheduleservice.domain.ScheduleWithAdTime;
 import be.ugent.scheduleservice.persistence.ScheduleRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -28,8 +29,8 @@ public class BioscoopAppScheduleServiceApplication {
         SpringApplication.run(BioscoopAppScheduleServiceApplication.class, args);
     }
 
-    /*@Bean
-    public CommandLineRunner populateDatabase(ScheduleRepository scheduleRepository) {
+    @Bean
+    public CommandLineRunner populateDatabase(MessageGateway messageGateway, ScheduleRepository scheduleRepository) {
         return (args) ->{
             logger.info("Insert");
 
@@ -63,17 +64,21 @@ public class BioscoopAppScheduleServiceApplication {
             logger.info("Data in de DB");
             for (Schedule s: scheduleRepository.findAll())
             {
-                logger.info(s.getZaalNmr()+"");
+                logger.info("zaalNmr: "+s.getZaalNmr()+"");
                 logger.info(s.getBeginDate()+"");
+                logger.info("id: "+s.getEventId()+"");
+
+                ScheduleWithAdTime scheduleWithAdTime=new ScheduleWithAdTime(s,600);
+                messageGateway.addAdvertisementSlots(scheduleWithAdTime);
 
             }
 
 
         };
-    }*/
+    }
 
 
-    @Bean
+    /*@Bean
     public CommandLineRunner testGateway(MessageGateway messageGateway, ScheduleRepository scheduleRepository){
         return (args) -> {
 
@@ -89,6 +94,6 @@ public class BioscoopAppScheduleServiceApplication {
             logger.info("TEST KAFKA");
 
         };
-    }
+    }*/
 
 }

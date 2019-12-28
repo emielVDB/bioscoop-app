@@ -26,4 +26,7 @@ public interface ScheduleRepository extends CrudRepository<Schedule,String>
     @Query("SELECT s FROM Schedule s WHERE (:zaalNmr = s.zaalNmr) AND NOT ((cast(:beginTimestamp as timestamp)<s.beginDate AND cast(:endTimestamp as timestamp)<s.beginDate) OR (cast(:beginTimestamp as timestamp)>s.endDate AND cast(:endTimestamp as timestamp)>s.endDate))")
     public List<Schedule> getMoviesAtTimeAndHall(String beginTimestamp,String endTimestamp,int zaalNmr);
 
+    public Schedule getScheduleByEventId(int eventId);
+
+    public void removeByEventId(int eventId);
 }

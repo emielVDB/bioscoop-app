@@ -1,5 +1,6 @@
 package be.ugent.advertisementscheduleservice.persistence;
 
+import be.ugent.advertisementscheduleservice.adapter.messaging.Schedule;
 import be.ugent.advertisementscheduleservice.domain.AdvertisementSlots;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -12,4 +13,7 @@ public interface AdvertisementSlotsRepository extends CrudRepository<Advertiseme
 
     @Query("SELECT a FROM AdvertisementSlots a WHERE a.adSpace= :duration")
     public List<AdvertisementSlots> getScheduleByDay(int duration);
+
+    public void removeByEventId(int eventId);
+    public AdvertisementSlots getAdvertisementSlotsByEventId(int eventId);
 }
