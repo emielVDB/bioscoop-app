@@ -10,11 +10,15 @@ public interface Channels {
 
     static final String ADDADSLOTS="AddAdSlots";
     static final String ADDADSLOTS_REPLY="AddAdSlotsReply";
+    static final String REMOVEADSLOT="RemoveAdsSlot";
 
     @Output(ADDADSLOTS_REPLY)
     MessageChannel AddAdSlotsReply();
 
     @Input(ADDADSLOTS)
     SubscribableChannel AddAdvertisementSlotsRequest();
+
+    @Input(REMOVEADSLOT)
+    SubscribableChannel RemoveAdsSlot();
 
 }

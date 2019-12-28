@@ -7,6 +7,9 @@ import org.springframework.messaging.SubscribableChannel;
 
 public interface Channels {
 
+
+
+
     static final String ADDADSLOTS="AddAdSlots";
     static final String ADDADSLOTS_REPLY="AddAdSlotsReply";
 
@@ -15,6 +18,16 @@ public interface Channels {
 
     static final String GETHALLPROP="GetHallProp";
     static final String GETHALLPROP_REPLY="GetHallPropReply";
+
+    static final String REMOVEADSLOT="RemoveAdsSlot";
+    static final String REMOVEBOOKEDHALL="RemoveBookedHall";
+
+    @Output(REMOVEADSLOT)
+    MessageChannel RemoveAdsSlot();
+
+    @Output(REMOVEBOOKEDHALL)
+    MessageChannel RemoveBookedHall();
+
 
     @Output(ADDADSLOTS)
     MessageChannel AddAdvertisementSlots();
