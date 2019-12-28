@@ -53,4 +53,15 @@ public class HallMGMTEventHandler {
             logger.info("There were no seats deleted");
         }
     }
+
+    @StreamListener(Channels.DELETE_RESERVED_HALL)
+    public void deleteReservedHall(ReserveHallRequest request){
+        logger.info("received request for deleting reserved hall for eventid " + request.getEventId());
+        int deletedHall = eventHallService.deleteReservedHall(request.getEventId());
+        if(deletedHall > -1){
+            logger.info("deleted eventhall for eventid" + request.getEventId());
+        }else{
+            logger.info("There was nog eventhall deleted");
+        }
+    }
 }
