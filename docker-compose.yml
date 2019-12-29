@@ -84,22 +84,22 @@ services:
       - '3306:3306'
 
   zookeeper:
-    container_name: 'zookeper'
+    container_name: 'zookeeper'
     image: confluentinc/cp-zookeeper
     environment:
       - ZOOKEEPER_CLIENT_PORT=2181
     ports:
       - "2181:2181"
 
-  kafka:
-    container_name: 'kafka'
+  kafkabroker:
+    container_name: 'kafkabroker'
     image: confluentinc/cp-kafka
     depends_on:
       - zookeeper
     environment:
       - KAFKA_BROKER_ID=1
       - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
-      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafkabroker:9092
       - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
     ports:
       - "9092:9092"
@@ -130,11 +130,11 @@ services:
     build: ./bioscoop-app-schedule-service
     links:
       - scheduledb
-      - kafka
+      - kafkabroker
       - zookeeper
     depends_on:
       - scheduledb
-      - kafka
+      - kafkabroker
       - zookeeper
     ports:
       - "2223:2223"
@@ -143,11 +143,11 @@ services:
     build: ./bioscoop-app-hall-mgmt-service
     links:
       - halldb
-      - kafka
+      - kafkabroker
       - zookeeper
     depends_on:
       - halldb
-      - kafka
+      - kafkabroker
       - zookeeper
     ports:
       - "2221:2221"
@@ -156,11 +156,11 @@ services:
     build: ./bioscoop-app-tickets-service
     links:
       - ticketdb
-      - kafka
+      - kafkabroker
       - zookeeper
     depends_on:
       - ticketdb
-      - kafka
+      - kafkabroker
       - zookeeper
     ports:
       - "2222:2222"
@@ -187,11 +187,11 @@ services:
     build: ./bioscoop-app-catering-service
     links:
       - cateringdb
-      - kafka
+      - kafkabroker
       - zookeeper
     depends_on:
       - cateringdb
-      - kafka
+      - kafkabroker
       - zookeeper
     ports:
       - "2227:2227"
@@ -199,10 +199,10 @@ services:
     container_name: 'statistics'
     build: ./bioscoop-app-statistics-service
     links:
-      - kafka
+      - kafkabroker
       - zookeeper
     depends_on:
-      - kafka
+      - kafkabroker
       - zookeeper
     ports:
       - "2228:2228"
