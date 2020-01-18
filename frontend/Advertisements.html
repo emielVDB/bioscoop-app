@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
+<head>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+</head>
+<body style="margin:10px;">
+	<script src="js/Advertisements.js"></script>
+	<h1>Advertisements service</h1>
+
+	<hr style="height:1px;border:none;color:#333;background-color:#333;">	
+
+	
+
+	<h3>AddAdvertisement (mogelijk dat je je adblocker moet afzetten)</h3>
+	mediaId (wijst naar een reclamefilmpje):	<input id="inputAddAdvertisementMediaId" placeholder="1" type="text">
+	Advertisement Slot Id(bij welk event/film deze wordt gezet):	<input id="inputAddAdvertisementAdvertisementSlotId" placeholder="1" type="text">
+	<br>	<br>
+	<button type="button" onclick="POSTAddAdvertisement()">POSTAddAdvertisement</button>
+	<p>Response:</p>
+	<textarea readonly disabled rows="4" cols="50" id="outputAddAdvertisement" ></textarea>
+
+	<hr style="height:1px;border:none;color:#333;background-color:#333;">	
+
+	<h3>RemoveAdvertisement (mogelijk dat je je adblocker moet afzetten)</h3>
+	id:	<input id="inputRemoveAdvertisementId" placeholder="1" type="text">
+	<br>	<br>
+	<button type="button" onclick="POSTRemoveAdvertisement()">POSTRemoveAdvertisement</button>
+	<p>Response:</p>
+	<textarea readonly disabled rows="4" cols="50" id="outputRemoveAdvertisement" ></textarea>
+
+		
+	
+</body>
+</html>

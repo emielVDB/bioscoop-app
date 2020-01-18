@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
+<head>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+</head>
+<body style="margin:10px;">
+	<script src="js/schedule.js"></script>
+	<h1>Schedule service</h1>
+
+	<hr style="height:1px;border:none;color:#333;background-color:#333;">	
+
+	<h3>GetScheduleByDay</h3>
+	date:	<input id="inputScheduleByDayDate" placeholder="2019-12-12" type="text">
+	<br>	<br>
+	<button type="button" onclick="GETScheduleByDay()">GETScheduleByDay</button>
+	<p>Response:</p>
+	<textarea readonly disabled rows="4" cols="50" id="outputGetSchedule"></textarea>
+	<hr style="height:1px;border:none;color:#333;background-color:#333;">	
+
+	<h3>AddSchedule</h3>
+	beginDate:	<input id="inputAddScheduleBeginDate" placeholder="2018-11-02T02:00:00" type="text">
+	endDate:	<input id="inputAddScheduleEndDate" placeholder="2018-11-02T04:00:00" type="text">
+	hallNummer:	<input id="inputAddScheduleHallNummer" placeholder="1" type="text">
+	eventType:	<input id="inputAddScheduleEventType" placeholder="FILM" type="text">
+	mediaId(geeft aan welke film/event):	<input id="inputAddScheduleMediaId" placeholder="1" type="text">
+	<br>	<br>
+	<button type="button" onclick="POSTAddSchedule()">POSTAddSchedule</button>
+	<p>Response:</p>
+	<textarea readonly disabled rows="4" cols="50" id="outputAddSchedule" ></textarea>
+
+	<hr style="height:1px;border:none;color:#333;background-color:#333;">	
+
+	<h3>RemoveSchedule</h3>
+	scheduleId:	<input id="inputRemoveScheduleId" placeholder="1" type="text">
+	<br>	<br>
+	<button type="button" onclick="POSTRemoveSchedule()">POSTRemoveSchedule</button>
+	<p>Response:</p>
+	<textarea readonly disabled rows="4" cols="50" id="outputRemoveSchedule" ></textarea>
+
+	
+
+
+		
+	
+</body>
+</html>

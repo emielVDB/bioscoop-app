@@ -25,9 +25,9 @@ public class ScheduleEventHandler {
     }
 
     @StreamListener(Channels.BOOKHALL_REPLY)
-    public void bookHallReply(Schedule s)
+    public void bookHallReply(int returnValue)
     {
-        if(s.getZaalNmr()==-1)
+        if(returnValue==-1)
         {
             logger.info("failed to book a hall");
         }

@@ -15,13 +15,17 @@ public class ReservedAdvertisements {
     @JoinColumn//(name="advertisementId", nullable=false)
     private AdvertisementSlots advertisementSlots;
 
-    private int mediaId;
+    private int mediaId=-1;
 
     public ReservedAdvertisements(int mediaId) {
         this.mediaId = mediaId;
     }
 
     public ReservedAdvertisements() {
+    }
+
+    public int getId() {
+        return id;
     }
 
     public void setAdvertisementSlots(AdvertisementSlots advertisementSlots) {
