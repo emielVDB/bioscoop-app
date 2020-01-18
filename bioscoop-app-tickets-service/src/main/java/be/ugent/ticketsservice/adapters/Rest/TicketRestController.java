@@ -38,6 +38,7 @@ public class TicketRestController implements BookTicketListener {
 
     @GetMapping
     public Iterable<Ticket> getTickets(){
+        logger.info("-------------Ticket voor save");
         return repository.findAll();
     }
     @GetMapping("/before")
@@ -46,7 +47,7 @@ public class TicketRestController implements BookTicketListener {
     }
     @PostMapping
     public DeferredResult<Ticket> bookTicket(@RequestBody Ticket ticket){
-        logger.info("Ticket voor save");
+        logger.info("-------------Ticket voor save");
         DeferredResult<Ticket> deferredResult=new DeferredResult<>(10000l);
         deferredResult.onTimeout(()->{
             deferredResult.setErrorResult("Timeout in request");
