@@ -30,6 +30,9 @@ public class AdvertisementSlots {
     {
 
     }
+    public int getAdvertisementId() {
+        return advertisementId;
+    }
 
     public int getEventId() {
         return eventId;

@@ -33,14 +33,13 @@ public class BioscoopAppAdvertisementScheduleServiceApplication {
 
             advertisementSlotsRepository.deleteAll();
 
-
-            advertisementSlotsRepository.save(new AdvertisementSlots(1,2,new ReservedAdvertisements(1),new ReservedAdvertisements(5)));
+            advertisementSlotsRepository.save(new AdvertisementSlots(1,5,new ReservedAdvertisements(1),new ReservedAdvertisements(5)));
 
 
             logger.info("Data in de DB");
             for (AdvertisementSlots s: advertisementSlotsRepository.findAll())
             {
-                logger.info(s.getEventId()+"");
+                logger.info(s.getAdvertisementId()+"");
             }
 
         };

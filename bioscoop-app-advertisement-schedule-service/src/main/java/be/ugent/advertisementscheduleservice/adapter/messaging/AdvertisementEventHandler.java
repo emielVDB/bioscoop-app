@@ -11,6 +11,7 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 public class AdvertisementEventHandler {
@@ -23,7 +24,7 @@ public class AdvertisementEventHandler {
     @SendTo(Channels.ADDADSLOTS_REPLY)
     public ScheduleWithAdTime addAdSlots(ScheduleWithAdTime scheduleWithAdTime)
     {
-        logger.info("Adding new AdvertisementSlots id:" + scheduleWithAdTime.schedule.getEventId()+"  seconds: "+scheduleWithAdTime.seconds);
+        logger.info("Adding new AdvertisementSlots id:" + scheduleWithAdTime.schedule.getEventId()+"  aantalAdvertisements: "+scheduleWithAdTime.seconds);
         AdvertisementSlots slot= advertisementSlotsRepository.getAdvertisementSlotsByEventId(scheduleWithAdTime.schedule.getEventId());
         if(slot==null)
         {
