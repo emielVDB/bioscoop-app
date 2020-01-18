@@ -20,6 +20,7 @@ public class ApiGatewayApplication {
                 .route(r -> r.host("**").and().path("/ticket/**").uri("http://ticket:2222"))
                 // hallmgmt service routes
                 .route(r -> r.host("**").and().path("/hall/**").uri("http://hall:2221"))
+
                 .route(r -> r.host("**").and().path("/eventhall/**").uri("http://hall:2221"))
                 // schedule service routes
                 .route(r -> r.host("**").and().path("/schedule/**").uri("http://schedule:2223"))
