@@ -17,7 +17,7 @@ function GETHallByNumber() {
     ourRequest.send();
 }
 
-function GETEventHallEventId() {
+function GETEventHallByeventId() {
     var eventId=$('#eventId').val();
 
     var ourRequest=new XMLHttpRequest();
@@ -30,21 +30,3 @@ function GETEventHallEventId() {
     };
     ourRequest.send();
 }
-
-// function POSTRemoveSchedule() {
-//     var eventId=$('#inputRemoveScheduleId').val();
-//
-//     var ourRequest=new XMLHttpRequest();
-//     ourRequest.open('POST',ScheduleServiceAdr+'remove', true);
-//     ourRequest.setRequestHeader("Content-type", "application/json");
-//
-//     ourRequest.onload=function()
-//     {
-//         //alert(ourRequest.responseText);
-//         $('#outputRemoveSchedule').val(ourRequest.responseText);
-//     };
-//
-//     var json=JSON.stringify({ "eventId": eventId });
-//
-//     ourRequest.send(json);
-// }
