@@ -42,7 +42,6 @@ public class CateringService {
         //check if the ordered products exist in our catalog
         for(Product p : products){
             if(p.getProductid() > 0){
-                logger.info("productname " + p.getName());
                 Optional<Product> thisProduct = productRepository.findById(p.getProductid());
                 if(thisProduct.isPresent()){
                     orderedProducts.add(thisProduct.get());
