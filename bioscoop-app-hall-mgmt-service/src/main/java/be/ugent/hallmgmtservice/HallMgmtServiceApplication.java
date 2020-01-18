@@ -55,9 +55,9 @@ public class HallMgmtServiceApplication {
         return(args -> {
             repository.deleteAll();
             logger.info("populating with data...");
-            repository.save(createHall(1, "5m x 10m", 20, 35));
-            repository.save(createHall( 2, "8m x 12m", 30, 40));
-            repository.save(createHall(3, "2m x 3m", 8, 15));
+            repository.save(createHall(1, "5m x 10m", 10, 5));
+            repository.save(createHall( 2, "8m x 12m", 3, 10));
+            repository.save(createHall(3, "2m x 3m", 7, 6));
             logger.info("populated with data");
         });
     }

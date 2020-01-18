@@ -1,5 +1,8 @@
 package be.ugent.consumptionservice.domain;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -14,6 +17,7 @@ public class Item {
     private Product product;
     @ManyToOne
     @JoinColumn(name = "FK_purchase")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Purchase purchase;
 
     public Item(){}

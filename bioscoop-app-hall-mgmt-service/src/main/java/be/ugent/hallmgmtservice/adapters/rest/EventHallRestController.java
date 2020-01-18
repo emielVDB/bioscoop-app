@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("eventhall")
+@CrossOrigin(origins = "*")
 public class EventHallRestController {
     private final EventHallRepository eventHallRepository;
 
@@ -19,7 +20,7 @@ public class EventHallRestController {
     }
 
     @GetMapping
-    public Iterable<EventHall> getAllEventHalls(){
+    public Iterable<EventHall> getAllEventHallIds(){
         return this.eventHallRepository.findAll();
     }
 
