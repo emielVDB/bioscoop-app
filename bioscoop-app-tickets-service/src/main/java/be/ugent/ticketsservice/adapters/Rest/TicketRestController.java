@@ -19,6 +19,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("ticket")
+@CrossOrigin(origins = "*")
 public class TicketRestController implements BookTicketListener {
     private static Logger logger = LoggerFactory.getLogger(TicketRestController.class);
     private TicketRepository repository;
