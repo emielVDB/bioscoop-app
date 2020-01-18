@@ -16,7 +16,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("advertisement")
-@CrossOrigin(origins = "*")
 public class AdvertisementRestController {
 
     private static Logger logger = LoggerFactory.getLogger(AdvertisementRestController.class);

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("eventhall")
-@CrossOrigin(origins = "*")
 public class EventHallRestController {
     private final EventHallRepository eventHallRepository;
 

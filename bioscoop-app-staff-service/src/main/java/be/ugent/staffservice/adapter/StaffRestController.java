@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("staff")
-@CrossOrigin(origins = "*")
 public class StaffRestController {
     @Autowired
     TaskRepository taskRepository;
