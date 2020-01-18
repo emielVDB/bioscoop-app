@@ -2,6 +2,8 @@ package be.ugent.consumptionservice.domain;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.List;
@@ -14,6 +16,7 @@ public class Purchase {
     private Long purchaseid;
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "purchase",cascade = CascadeType.ALL)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Item> items;
 
     public Purchase(){}
