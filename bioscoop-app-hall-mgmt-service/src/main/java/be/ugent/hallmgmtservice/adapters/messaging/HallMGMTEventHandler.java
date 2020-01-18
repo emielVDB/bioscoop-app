@@ -37,9 +37,9 @@ public class HallMGMTEventHandler {
 
     @StreamListener(Channels.RESERVE_HALL)
     @SendTo(Channels.RESERVED_HALL)
-    public int reserveHall(ReserveHallRequest request){
-        logger.info("received request for reserving hall number " + request.getHallNumber());
-        return eventHallService.reserveHall(request.getHallNumber(), request.getEventId());
+    public int reserveHall(Schedule request){
+        logger.info("received request for reserving hall number " + request.getZaalNmr()+"   with eventId: "+request.getEventId());
+        return eventHallService.reserveHall(request.getZaalNmr(), request.getEventId());
     }
 
     @StreamListener(Channels.DELETE_BOOKED_SEATS)
@@ -55,7 +55,7 @@ public class HallMGMTEventHandler {
     }
 
     @StreamListener(Channels.DELETE_RESERVED_HALL)
-    public void deleteReservedHall(ReserveHallRequest request){
+    public void deleteReservedHall(Schedule request){
         logger.info("received request for deleting reserved hall for eventid " + request.getEventId());
         int deletedHall = eventHallService.deleteReservedHall(request.getEventId());
         if(deletedHall > -1){

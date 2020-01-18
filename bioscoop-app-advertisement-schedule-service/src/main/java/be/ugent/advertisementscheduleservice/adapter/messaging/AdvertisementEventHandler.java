@@ -24,8 +24,8 @@ public class AdvertisementEventHandler {
     @SendTo(Channels.ADDADSLOTS_REPLY)
     public ScheduleWithAdTime addAdSlots(ScheduleWithAdTime scheduleWithAdTime)
     {
-        logger.info("Adding new AdvertisementSlots id:" + scheduleWithAdTime.schedule.getEventId()+"  seconds: "+scheduleWithAdTime.seconds);
-        List<AdvertisementSlots> slot= advertisementSlotsRepository.getAdvertisementSlotsByEventId(scheduleWithAdTime.schedule.getEventId());
+        logger.info("Adding new AdvertisementSlots id:" + scheduleWithAdTime.schedule.getEventId()+"  aantalAdvertisements: "+scheduleWithAdTime.seconds);
+        AdvertisementSlots slot= advertisementSlotsRepository.getAdvertisementSlotsByEventId(scheduleWithAdTime.schedule.getEventId());
         if(slot==null)
         {
             advertisementSlotsRepository.save(new AdvertisementSlots(scheduleWithAdTime.schedule.getEventId(),scheduleWithAdTime.seconds));
@@ -45,7 +45,7 @@ public class AdvertisementEventHandler {
     {
         logger.info("Request to delete adslot with eventId: "+schedule.getEventId());
 
-        List<AdvertisementSlots> advertisementSlots= advertisementSlotsRepository.getAdvertisementSlotsByEventId(schedule.getEventId());
+        AdvertisementSlots advertisementSlots= advertisementSlotsRepository.getAdvertisementSlotsByEventId(schedule.getEventId());
         if(advertisementSlots!=null)
         {
             advertisementSlotsRepository.removeByEventId(schedule.getEventId());

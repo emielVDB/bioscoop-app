@@ -16,7 +16,7 @@ public interface AdvertisementSlotsRepository extends CrudRepository<Advertiseme
     public List<AdvertisementSlots> getScheduleByDay(int duration);
 
     public void removeByEventId(int eventId);
-    public List<AdvertisementSlots> getAdvertisementSlotsByEventId(int eventId);
+    public AdvertisementSlots getAdvertisementSlotsByEventId(int eventId);
     public AdvertisementSlots getAdvertisementSlotsByAdvertisementId(int advertisementId);
 
 }

@@ -103,8 +103,9 @@ public class ScheduleRestController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("A Movie was already planned");
         }
 
-        messageGateway.BookHall(schedule);
         scheduleRepository.save(schedule);
+        logger.info(schedule.getEventId()+"");
+        messageGateway.BookHall(schedule);
 
         ScheduleWithAdTime scheduleWithAdTime=new ScheduleWithAdTime(schedule,5);
         messageGateway.addAdvertisementSlots(scheduleWithAdTime);
