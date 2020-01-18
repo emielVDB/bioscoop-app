@@ -68,7 +68,7 @@ public class BioscoopAppScheduleServiceApplication {
                 logger.info(s.getBeginDate()+"");
                 logger.info("id: "+s.getEventId()+"");
 
-                ScheduleWithAdTime scheduleWithAdTime=new ScheduleWithAdTime(s,600);
+                ScheduleWithAdTime scheduleWithAdTime=new ScheduleWithAdTime(s,5);
                 messageGateway.addAdvertisementSlots(scheduleWithAdTime);
 
             }

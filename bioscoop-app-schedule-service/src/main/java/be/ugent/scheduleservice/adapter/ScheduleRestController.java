@@ -88,6 +88,15 @@ public class ScheduleRestController {
         String endTime="2018-11-02 10:00:00";
         int zaalNmr=11;*/
 
+        if(schedule.getBeginDate()==null)
+        {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Begin date is empty");
+        }
+        if(schedule.getEndDate()==null)
+        {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("End date is empty");
+        }
+
         Iterable<Schedule> sch=scheduleRepository.getMoviesAtTimeAndHall(schedule.getBeginDate().toString(),schedule.getEndDate().toString(),schedule.getZaalNmr());
         if(sch.iterator().hasNext())
         {
@@ -97,7 +106,7 @@ public class ScheduleRestController {
         messageGateway.BookHall(schedule);
         scheduleRepository.save(schedule);
 
-        ScheduleWithAdTime scheduleWithAdTime=new ScheduleWithAdTime(schedule,600);
+        ScheduleWithAdTime scheduleWithAdTime=new ScheduleWithAdTime(schedule,5);
         messageGateway.addAdvertisementSlots(scheduleWithAdTime);
         return ResponseEntity.status(HttpStatus.CREATED).body("Successfully created");
     }
@@ -114,15 +123,13 @@ public class ScheduleRestController {
     //public Iterable<Schedule> postSchedule(@RequestBody Schedule schedule)
     public ResponseEntity removeSchedule(@RequestBody Schedule schedule)
     {
-
         Schedule s= scheduleRepository.getScheduleByEventId(schedule.getEventId());
-
         if(s==null)
         {
             return ResponseEntity.status(HttpStatus.CREATED).body("Could not find event with id:"+schedule.getEventId());
         }
         messageGateway.removeAdsSlot(s);
-        //messageGateway.removeBookedHall(s.get());
+        messageGateway.removeBookedHall(s);
 
         scheduleRepository.removeByEventId(s.getEventId());
 

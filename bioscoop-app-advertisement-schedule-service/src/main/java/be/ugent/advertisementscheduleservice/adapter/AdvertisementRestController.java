@@ -11,6 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
+import java.util.List;
+
 @RestController
 @RequestMapping("advertisement")
 @CrossOrigin(origins = "*")
@@ -40,17 +43,46 @@ public class AdvertisementRestController {
     }
 
 
-    @PostMapping()
+    @PostMapping("add")
     //public Iterable<Schedule> postSchedule(@RequestBody Schedule schedule)
-    public ResponseEntity addAdvertisement(@RequestBody int eventId,ReservedAdvertisements reservedAdvertisements)
+    public ResponseEntity addAdvertisement(@RequestBody ReservedAdvertisements reservedAdvertisements)
     {
+        int adSlotId=reservedAdvertisements.getAdvertisementSlots().getAdvertisementId();
+        AdvertisementSlots bestaand=advertisementSlotsRepository.getAdvertisementSlotsByAdvertisementId(adSlotId);
+        if(bestaand==null)
+        {
+            return ResponseEntity.status(HttpStatus.CREATED).body("Could not find advertisementSlot with id:"+adSlotId);
+        }
 
+        List<ReservedAdvertisements> r=reservedAdvertisementsRepository.getReservedAdvertisementsByAdvertisementSlots(bestaand);
+        if(r.size()>=bestaand.getAdSpace())
+        {
+            return ResponseEntity.status(HttpStatus.CREATED).body("Already the limit of advertisements are planned (max="+bestaand.getAdSpace()+")");
+        }
+
+        if(reservedAdvertisements.getMediaId()==-1)
+        {
+            return ResponseEntity.status(HttpStatus.CREATED).body("Could not find a mediaId");
+        }
         //int seconds= ...reservedAdvertisements.getMediaId();
-
-        reservedAdvertisementsRepository.save(reservedAdvertisements);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Successfully created");
+        ReservedAdvertisements re=reservedAdvertisementsRepository.save(reservedAdvertisements);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Successfully created, new advertisements id="+re.getId());
     }
 
+    @Transactional
+    @PostMapping("remove")
+    //public Iterable<Schedule> postSchedule(@RequestBody Schedule schedule)
+    public ResponseEntity removeAdvertisement(@RequestBody ReservedAdvertisements reservedAdvertisements)
+    {
+        int id=reservedAdvertisements.getId();
+        ReservedAdvertisements res= reservedAdvertisementsRepository.getReservedAdvertisementsById(id);
+        if(res==null)
+        {
+            return ResponseEntity.status(HttpStatus.CREATED).body("Could not find an advertisement slot with id:"+id);
+        }
+        reservedAdvertisementsRepository.removeById(id);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Successfully removed");
+    }
 
 
 }

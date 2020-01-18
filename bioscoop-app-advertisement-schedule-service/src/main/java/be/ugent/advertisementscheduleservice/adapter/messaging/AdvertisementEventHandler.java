@@ -11,6 +11,7 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 public class AdvertisementEventHandler {
@@ -24,7 +25,7 @@ public class AdvertisementEventHandler {
     public ScheduleWithAdTime addAdSlots(ScheduleWithAdTime scheduleWithAdTime)
     {
         logger.info("Adding new AdvertisementSlots id:" + scheduleWithAdTime.schedule.getEventId()+"  seconds: "+scheduleWithAdTime.seconds);
-        AdvertisementSlots slot= advertisementSlotsRepository.getAdvertisementSlotsByEventId(scheduleWithAdTime.schedule.getEventId());
+        List<AdvertisementSlots> slot= advertisementSlotsRepository.getAdvertisementSlotsByEventId(scheduleWithAdTime.schedule.getEventId());
         if(slot==null)
         {
             advertisementSlotsRepository.save(new AdvertisementSlots(scheduleWithAdTime.schedule.getEventId(),scheduleWithAdTime.seconds));
@@ -44,7 +45,7 @@ public class AdvertisementEventHandler {
     {
         logger.info("Request to delete adslot with eventId: "+schedule.getEventId());
 
-        AdvertisementSlots advertisementSlots= advertisementSlotsRepository.getAdvertisementSlotsByEventId(schedule.getEventId());
+        List<AdvertisementSlots> advertisementSlots= advertisementSlotsRepository.getAdvertisementSlotsByEventId(schedule.getEventId());
         if(advertisementSlots!=null)
         {
             advertisementSlotsRepository.removeByEventId(schedule.getEventId());
