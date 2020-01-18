@@ -39,7 +39,7 @@ function POSTTask() {
         $('#outputTask').val(ourRequest.responseText);
     };
 
-    var json=JSON.stringify({ "task": task });
+    var json=JSON.stringify(task);
 
     ourRequest.send(json);
 }
