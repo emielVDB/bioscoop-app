@@ -21,12 +21,20 @@ public class AdvertisementEventHandler {
 
     @StreamListener(Channels.ADDADSLOTS)
     @SendTo(Channels.ADDADSLOTS_REPLY)
-    public int addAdSlots(ScheduleWithAdTime scheduleWithAdTime)
+    public ScheduleWithAdTime addAdSlots(ScheduleWithAdTime scheduleWithAdTime)
     {
         logger.info("Adding new AdvertisementSlots id:" + scheduleWithAdTime.schedule.getEventId()+"  seconds: "+scheduleWithAdTime.seconds);
-        advertisementSlotsRepository.save(new AdvertisementSlots(scheduleWithAdTime.schedule.getEventId(),scheduleWithAdTime.seconds));
-
-        return -1;
+        AdvertisementSlots slot= advertisementSlotsRepository.getAdvertisementSlotsByEventId(scheduleWithAdTime.schedule.getEventId());
+        if(slot==null)
+        {
+            advertisementSlotsRepository.save(new AdvertisementSlots(scheduleWithAdTime.schedule.getEventId(),scheduleWithAdTime.seconds));
+            return scheduleWithAdTime;
+        }
+        else
+        {
+            scheduleWithAdTime.setSeconds(-1);
+            return scheduleWithAdTime;
+        }
     }
 
 
