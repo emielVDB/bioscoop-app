@@ -1,4 +1,4 @@
-var ticketaddress='http://192.168.99.100:3000/ticket/';
+var ticketaddress='http://127.0.0.1:3000/ticket/';
 function bookTicket(){
     var dateEvent=$('#DateEvent').val();
     var name=$('#name').val();
