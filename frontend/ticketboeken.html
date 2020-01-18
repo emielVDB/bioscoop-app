@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
+<head>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+</head>
+<body style="margin:10px;">
+	<script src="/js/ticketboeken.js"></script>
+	<h1>Ticket boeken</h1>
+
+	<hr style="height:1px;border:none;color:#333;background-color:#333;">	
+
+	<hr style="height:1px;border:none;color:#333;background-color:#333;">	
+	<h3>Ticket boeken</h3>
+	DateEvent:	<input id="DateEvent" value="2020-01-19" type="text">
+    <br>	<br>
+    Name *:   <input id="name" type="text" required>
+    <br>	<br>
+    Seats *:  <input id="seats" placeholder="10104" type="text" required>
+    In de vorm van: rijnummer, zetelnummer, eventnummer gescheiden door komma
+    <br>	<br>
+    Consumptions:   <input id="consumptions" type="text">
+    ids gescheiden door komma opgeven, mogelijkheden 1,2,3,4
+    <br>	<br>
+    Hallnumber *: <input id="hallnumber" value="2" type="text" required>
+    <br>    <br>
+    Eventid *: <input id="eventid" value="4" type="text" required>
+
+    
+	<button type="button" onclick="bookTicket()">bookTicket</button>
+	<p>Response:</p>
+	<textarea readonly disabled rows="4" cols="50" id="outputBookTicket"></textarea>
+
+
+    <p>Als booked true is, is het ticket boeken geslaagd!</p>
+    <hr style="height:1px;border:none;color:#333;background-color:#333;">	
+    <hr style="height:1px;border:none;color:#333;background-color:#333;">	
+    
+
+	<h3>Get all tickets</h3>
+	<br>	<br>
+	<button type="button" onclick="getTickets()">getTickets</button>
+	<p>Response:</p>
+	<textarea readonly disabled rows="4" cols="50" id="outputTickets"></textarea>
+	
+</body>
+</html>
