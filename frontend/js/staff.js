@@ -1,4 +1,4 @@
-var baseIp="http://192.168.99.100:3000/staff";
+var baseIp="http://127.0.0.1:3000/staff";
 
 function GenerateTasks(){
     var date=$('#generateDate').val();

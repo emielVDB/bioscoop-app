@@ -1,4 +1,4 @@
-// var baseIp="http://192.168.99.100:3000/media";
+// var baseIp="http://127.0.0.1:3000/media";
 var baseIp="http://localhost:3000/media";
 
 function GETMedia(){
