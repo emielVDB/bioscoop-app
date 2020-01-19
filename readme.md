@@ -59,16 +59,16 @@ Haal taken op voor het personeel voor een bepaalde datum.
 Voeg manueel een taak toe aan de automatisch gegenereerde taken door middel van een JSON-object te posten.
 
 ## Media service
-Een media item is een film dat aan event kan gekoppeld worden.
+Een media item is een wrapper voor meerdere media-bestanden (film zelf, trailers, advertisements, images, ...) dat aan een eventid kan gekoppeld worden. Meerdere verschillende events gebruiken dikwijls dezelfde media.
 ### Get media by title
-Als er een film werd toegevoeged via *Post media* kan er gezocht worden naar die film op titel.
+Als er een media-item werd toegevoeged via *Post media* kan er gezocht worden naar dat item via de titel.
 
 ### Post media
 Toevoegen van een film. Er staat een JSON-object klaar dat gepost kan worden. Daarna kan dit media-item via titel opgehaald worden.
 
 ### Post file
 Via post file kan je media-bestanden aan een media-item hangen. Het film bestand zelf van een bepaalde film, een trailer, reclame filmpjes. Op die manier kunnen de techniekers met één get alle media ophalen die ze nodig hebben om de filmvoorstelling te laten doorgaan.
-Het media id kan gekopieerd worden uit de response van *Get media by title*. Bij *Bestand kiezen* kan als test een leeg tekstbestand opgeven. Enkel de title van het bestand zal gebruikt en opgeslagen worden in deze test omgeving. *Type* is het type media dat je aan het media-item hangt: trailer, advertisement, film.
+Het media id kan gekopieerd worden uit de response van *Get media by title*. Bij *Bestand kiezen* kan als test een leeg tekstbestand opgeven. Enkel de title van het bestand zal gebruikt en opgeslagen worden in deze test omgeving. De files worden fictief geuploaded naar google cloud storage, een fake url wordt aangemaakt. *Type* is het type media dat je aan het media-item hangt: trailer, advertisement, film.
 
 ## Advertisement service
 ### Add Advertisement 
