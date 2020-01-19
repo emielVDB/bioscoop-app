@@ -11,10 +11,10 @@ Hiermee is het mogelijk alle events op te vragen voor een bepaalde dag dag.
 
 ### Add Schedule
 Hier is het mogelijk om een event toe te voegen aan het schedule. De informatie die nodig is zijn:
-beginDate, endDate, hallNummer(zaal nummer waar het event zich zou plaats vinden), eventType(wat het event inhoud, op dit moment is er enkel het type FILM) en als laatste mediaId (in het geval van een film geeft deze aan welke film gespeeld zal worden).
+beginDate, endDate, hallNummer(zaal nummer waar het event zich zou plaats vinden), eventType(wat het event inhoud, op dit moment is er enkel het type FILM) en als laatste mediaId (in het geval van een film geeft deze aan welke film gespeeld zal worden). Voor dat het event wordt toegevoegd zal er gecheckt worden, of er geen andere events zullen zijn op diezelfde dag en zaal.
 
 ### Remove Schedule
-Hier is het mogelijk om events te verwijderen. Dit gebeurd via aangeven van het eventId van het event dat verwijderd moet worden.
+Hier is het mogelijk om events te verwijderen. Dit gebeurd via het eventId van het event aangeven dat verwijderd moet worden.
 
 ## Hall management service
 ### Hall by number
@@ -64,3 +64,5 @@ Via post file kan je media-bestanden aan een media-item hangen. Het film bestand
 Het media id kan gekopieerd worden uit de response van *Get media by title*. Bij *Bestand kiezen* kan als test een leeg tekstbestand opgeven. Enkel de title van het bestand zal gebruikt en opgeslagen worden in deze test omgeving. *Type* is het type media dat je aan het media-item hangt: trailer, advertisement, film.
 
 ## Advertisement service
+### Add Advertisement 
+### Remove Advertisement
