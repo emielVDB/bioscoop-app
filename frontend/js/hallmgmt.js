@@ -1,6 +1,6 @@
 
 var baseIp="http://192.168.99.100:3000";
-// var HallServiceAdr=baseIp+":3000/hall/";
+// var baseIp="http://localhost:3000";
 
 
 function GETHallByNumber() {
@@ -11,7 +11,11 @@ function GETHallByNumber() {
     ourRequest.onload=function()
     {
         //alert(ourRequest.responseText);
-        $('#outputGetHallByNumber').val(ourRequest.responseText);
+        if(ourRequest.responseText == ""){
+            $('#outputGetHallByNumber').val("geen hall voor nummer " + hallNumber);
+        }else{
+            $('#outputGetHallByNumber').val(ourRequest.responseText);
+        }
 
     };
     ourRequest.send();
@@ -25,7 +29,12 @@ function GETEventHallByeventId() {
     ourRequest.onload=function()
     {
         //alert(ourRequest.responseText);
-        $('#outputGetEventHallByEventId').val(ourRequest.responseText);
+        if(ourRequest.responseText == ""){
+            $('#outputGetEventHallByEventId').val("geen eventid voor id " + eventId);
+        }else{
+            $('#outputGetEventHallByEventId').val(ourRequest.responseText);
+        }
+
 
     };
     ourRequest.send();
