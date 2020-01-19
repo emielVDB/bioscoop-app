@@ -18,7 +18,7 @@ Bij het aanmaken van een event wordt een zaal aan het event gekoppeld. Van die z
 
 ## Ticket service
 
-###Ticket boeken
+### Ticket boeken
 
 Bij enkele velden zoals DateEvent, Name, Hallnumber en EventId wordt er van uit gegaan dat dit al in een eerdere stap is gekozen en wordt ingevuld.
 Omdat deze front-end dit niet ophaalt uit vorige stappen kunnen deze hier ingevuld worden.
