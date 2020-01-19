@@ -96,19 +96,25 @@ public class ScheduleRestController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("End date is empty");
         }
 
-        Iterable<Schedule> sch=scheduleRepository.getMoviesAtTimeAndHall(schedule.getBeginDate().toString(),schedule.getEndDate().toString(),schedule.getZaalNmr());
-        if(sch.iterator().hasNext())
-        {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("A Movie was already planned");
+        try {
+            Iterable<Schedule> sch=scheduleRepository.getMoviesAtTimeAndHall(schedule.getBeginDate().toString(),schedule.getEndDate().toString(),schedule.getZaalNmr());
+            if(sch.iterator().hasNext())
+            {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("A Movie was already planned");
+            }
+
+            scheduleRepository.save(schedule);
+            logger.info(schedule.getEventId()+"");
+            messageGateway.BookHall(schedule);
+
+            ScheduleWithAdTime scheduleWithAdTime=new ScheduleWithAdTime(schedule,5);
+            messageGateway.addAdvertisementSlots(scheduleWithAdTime);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Successfully created");
         }
-
-        scheduleRepository.save(schedule);
-        logger.info(schedule.getEventId()+"");
-        messageGateway.BookHall(schedule);
-
-        ScheduleWithAdTime scheduleWithAdTime=new ScheduleWithAdTime(schedule,5);
-        messageGateway.addAdvertisementSlots(scheduleWithAdTime);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Successfully created");
+        catch (Exception e)
+        {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("A value was invalid");
+        }
     }
 
 
@@ -126,7 +132,7 @@ public class ScheduleRestController {
         Schedule s= scheduleRepository.getScheduleByEventId(schedule.getEventId());
         if(s==null)
         {
-            return ResponseEntity.status(HttpStatus.CREATED).body("Could not find event with id:"+schedule.getEventId());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Could not find event with id:"+schedule.getEventId());
         }
         messageGateway.removeAdsSlot(s);
         messageGateway.removeBookedHall(s);
