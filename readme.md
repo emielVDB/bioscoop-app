@@ -19,6 +19,14 @@ Bij het aanmaken van een event wordt een zaal aan het event gekoppeld. Van die z
 ## Ticket service
 
 ## Staff service
+### Generate tasks
+Dit is een job die iedere nacht automatisch zou uitgevoerd worden om op basis van de schedule taken voor het personeel te genereren. Op die manier moet er doorheen de dag niet telkens heel wat computing gebeuren bij het opvragen van een taak (Get task). In deze test omgeving moet die job manueel uitgevoerd worden voordat er taken kunnen opgehaald worden door op de knop **Generate tasks** te klikken.
+
+### Get task
+Haal taken op voor het personeel voor een bepaalde datum.
+
+### Add task
+Voeg manueel een taak toe aan de automatisch gegenereerde taken door middel van een JSON-object te posten.
 
 ## Media service
 
