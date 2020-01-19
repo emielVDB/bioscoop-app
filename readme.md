@@ -11,7 +11,8 @@ Hiermee is het mogelijk alle events op te vragen voor een bepaalde dag.
 
 ### Add Schedule
 Hier is het mogelijk om een event toe te voegen aan het schedule. De informatie die nodig is zijn:
-beginDate, endDate, hallNummer(zaal nummer waar het event zich zou plaats vinden), eventType(wat het event inhoud, op dit moment is er enkel het type FILM) en als laatste mediaId (in het geval van een film geeft deze aan welke film gespeeld zal worden). Voor dat het event wordt toegevoegd zal er gecheckt worden, of er geen andere events zullen zijn op diezelfde dag en zaal.
+beginDate, endDate, hallNummer(zaal nummer waar het event zich zou plaats vinden), eventType(wat het event inhoud, op dit moment is er enkel het type FILM) en als laatste mediaId (in het geval van een film geeft deze aan welke film gespeeld zal worden). Hier zit nog een bug: de rest controller aanvaardt enkel integers, terwijl het id dat de media service teruggeeft bij het toevoegen van media een string is. Om de test te laten slagen kan er hier een random integer worden meegegeven. Het event zal dan niet gekoppeld wordt aan een bestaand media item, maar dat heeft geen invloed op de test.
+Voor dat het event wordt toegevoegd zal er gecheckt worden, of er geen andere events zullen zijn op diezelfde dag en zaal.
 
 ### Remove Schedule
 Hier is het mogelijk om events te verwijderen. Dit gebeurd via het eventId van het event aangeven dat verwijderd moet worden.
