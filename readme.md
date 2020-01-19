@@ -1,5 +1,7 @@
 # Bioscoop applicatie
 
+TODO Emiel: uitleg verschil master en dockerized branche
+
 Hieronder is er per service die beschikbaar is, via een frontend die de gateway gebruikt, een scenario geschreven van hoe getest kan worden.
 
 ## Schedule service
