@@ -5,6 +5,13 @@ TODO Emiel: uitleg verschil master en dockerized branche
 Hieronder is er per service die beschikbaar is, via een frontend die de gateway gebruikt, een scenario geschreven van hoe getest kan worden. Via de index.html pagina is er een overzicht van de verschillende frontend om de services te gebruiken beschikbaar.
 
 ## Schedule service
+### Get Schedule By Day
+Hiermee is het mogelijk alle events op te vragen voor een bepaalde dag dag.
+> *Vooraf*: maak een event aan in de schedule service en gebruik die dag om alle events, op die dag op te vragen. *Of*: gebruik één de dagen "2018-11-2,2018-11-5,2018-11-6" op deze dagen zijn reeds events ingepland.
+
+### Add Schedule
+Hier is het mogelijk om een event toe te voegen aan het schedule. De informatie die nodig is zijn:
+beginDate, endDate, hallNummer(zaal nummer waar het event zich zou plaats vinden), eventType(wat het event inhoud, op dit moment is er enkel het type FILM) en als laatste mediaId (in het geval van een film geeft deze aan welke film gespeeld zal worden).
 
 ## Hall management service
 ### Hall by number
