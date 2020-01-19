@@ -1,5 +1,10 @@
 version: '3'
 services:
+  frontend:
+    container_name: 'frontend'
+    build: ./frontend
+    ports:
+      - "7777:80"
   halldb:
     image: 'mongo'
     container_name: 'halldb'
