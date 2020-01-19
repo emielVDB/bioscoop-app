@@ -1,7 +1,7 @@
-
-var baseIp="http://127.0.0.1";
-var ScheduleServiceAdr=baseIp+":2223/schedule/";
-var AdvertisementServiceAdr=baseIp+":2226/advertisement/";
+// var baseIp="http://localhost";
+var baseIp="http://192.168.99.100";
+var ScheduleServiceAdr=baseIp+":3000/schedule/";
+var AdvertisementServiceAdr=baseIp+":3000/advertisement/";
 
 
 function GETScheduleByDay() {
@@ -54,7 +54,7 @@ function POSTAddSchedule() {
 	var ourRequest=new XMLHttpRequest();
 	ourRequest.open('POST',ScheduleServiceAdr+'add', true);
 	ourRequest.setRequestHeader("Content-type", "application/json");
-
+	console.log("hey " + ScheduleServiceAdr+'add');
 	ourRequest.onload=function()
 	{
 		//alert(ourRequest.responseText);
