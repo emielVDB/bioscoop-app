@@ -6,7 +6,7 @@ Hieronder is er per service die beschikbaar is, via een frontend die de gateway 
 
 ## Schedule service
 ### Get Schedule By Day
-Hiermee is het mogelijk alle events op te vragen voor een bepaalde dag dag.
+Hiermee is het mogelijk alle events op te vragen voor een bepaalde dag.
 > *Vooraf*: maak een event aan in de schedule service en gebruik die dag om alle events, op die dag op te vragen. *Of*: gebruik één de dagen "2018-11-2,2018-11-5,2018-11-6" op deze dagen zijn reeds events ingepland.
 
 ### Add Schedule
@@ -65,4 +65,8 @@ Het media id kan gekopieerd worden uit de response van *Get media by title*. Bij
 
 ## Advertisement service
 ### Add Advertisement 
+Bij het toevoegen van een advertisement hebben we het mediaId (reclamefilmpje) en het eventId(bij welke film/event deze hoort) nodig. Bij elke evenId(film/event) is er de mogelijkheid om te zeggen hoeveel reclamefilmpjes er maximaal kunnen spelen, deze waarde staat default op 5. Op eventId 1 staat er al een advertisement ingepland, voor deze eventId kunnen dus nog maar maximaal 4 andere reclamefilmpjes ingepland worden.
+> *Vooraf*: maak een event aan in de schedule service en gebruik die eventId om alle events, op die dag op te vragen. *Of*: gebruik één de eventId’s "1,2,3,4" deze eventId’s zijn reeds aangemaakt. 
+
 ### Remove Advertisement
+Het is mogelijk om een advertisment te verwijderen, door het meegeven van een advertismentid.
