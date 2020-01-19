@@ -50,7 +50,7 @@ Deze request haalt alle tickets op. Zo kan om te testen makkelijk bekeken worden
 
 ## Staff service
 ### Generate tasks
-Dit is een job die iedere nacht automatisch zou uitgevoerd worden om op basis van de schedule taken voor het personeel te genereren. Op die manier moet er doorheen de dag niet telkens heel wat computing gebeuren bij het opvragen van een taak (Get task). In deze test omgeving moet die job manueel uitgevoerd worden voordat er taken kunnen opgehaald worden door op de knop *Generate tasks* te klikken.
+Dit is een job die iedere nacht automatisch zou uitgevoerd worden om op basis van de schedule taken voor het personeel te genereren.Of te hergenereren indien de schedule aangepast werd. Op die manier moet er doorheen de dag niet telkens heel wat computing gebeuren bij het opvragen van een taak (Get task). In deze test omgeving moet die job manueel uitgevoerd worden voordat er taken kunnen opgehaald worden door op de knop *Generate tasks* te klikken.
 
 ### Get task
 Haal taken op voor het personeel voor een bepaalde datum.
