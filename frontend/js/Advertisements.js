@@ -1,7 +1,7 @@
 
 var baseIp="http://127.0.0.1";
-var ScheduleServiceAdr=baseIp+":2223/schedule/";
-var AdvertisementServiceAdr=baseIp+":2226/advertisement/";
+var ScheduleServiceAdr=baseIp+":3000/schedule/";
+var AdvertisementServiceAdr=baseIp+":3000/advertisement/";
 
 
 function GETScheduleByDay() {
