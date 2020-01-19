@@ -4,7 +4,7 @@ Dit git project bestaat uit twee branches, zodat development eenvoudiger kon ver
 - De master branch is bedoeld om alle services te runnen via intellij en hier wordt enkel docker gebruikt voor databases en kafka. Routering naar andere services gebeurt ook niet via DNS namen.
 
 - In de containerized branch zijn alle ip adressen vervangen door dns en is het de bedoeling dat alle services worden opgestart met docker compose. Om te images te builden werden de jar files van elke services gebruikt, deze jar files kunnen gemakkelijk geupdated worden met het shellscript generateJars.sh.
-Development proces was als volgt. Nieuwe functionaleiten worden toegevoegd in de master branch en dan gemerged naar de dockerized branch. 
+Development proces was als volgt: nieuwe functionaliteiten worden toegevoegd in de master branch en dan gemerged naar de dockerized branch. 
 
 Meer informatie over hoe de services geployed werden op kubernetes is te vinden in de readme van volgend git project.
 https://github.com/emielVDB/bioscoop-app-kube-config
