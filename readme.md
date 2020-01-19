@@ -13,6 +13,9 @@ Hiermee is het mogelijk alle events op te vragen voor een bepaalde dag dag.
 Hier is het mogelijk om een event toe te voegen aan het schedule. De informatie die nodig is zijn:
 beginDate, endDate, hallNummer(zaal nummer waar het event zich zou plaats vinden), eventType(wat het event inhoud, op dit moment is er enkel het type FILM) en als laatste mediaId (in het geval van een film geeft deze aan welke film gespeeld zal worden).
 
+### Remove Schedule
+Hier is het mogelijk om events te verwijderen. Dit gebeurd via aangeven van het eventId van het event dat verwijderd moet worden.
+
 ## Hall management service
 ### Hall by number
 Dit is een get request dat een hall ophaalt via het hall nummer. De output is een JSON met daarin de details van hoe de zaal er uit ziet. De JSON bevat number (= zaal nummer), seats (= array met alle seats), screenSize, facilities (= array met verschillende faciliteiten van een zaal) en technologies (= array met technische specificaties).
