@@ -5,6 +5,8 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
 <head>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+	<meta charset="UTF-8">
+	<title>Media</title>
 </head>
 <body style="margin:10px;">
 <script src="js/media.js"></script>
@@ -34,7 +36,7 @@ eventid:	<textarea id="mediaJson">{
 
 <h3>Post file</h3>
 media id: <input id="mediaId" type="text">
-file:	<input id="file" type="file">
+file:	<input name="file" id="fileField" type="file">
 type: <input id="type" placeholder="trailer" type="text">
 <br>	<br>
 <button type="button" onclick="POSTFile()">Post media</button>
