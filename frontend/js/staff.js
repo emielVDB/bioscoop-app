@@ -4,7 +4,6 @@ function GenerateTasks(){
     var date=$('#generateDate').val();
     var ourRequest=new XMLHttpRequest();
     ourRequest.open('GET',baseIp + "/generate/" + date, true);
-    console.log(baseIp + "/generate/" + date);
     ourRequest.onload=function()
     {
         //alert(ourRequest.responseText);
@@ -25,4 +24,22 @@ function GETTaskByDate() {
 
     };
     ourRequest.send();
+}
+
+function POSTTask() {
+    var task=$('#inputTask').val();
+
+    var ourRequest=new XMLHttpRequest();
+    ourRequest.open('POST',baseIp, + "/", true);
+    ourRequest.setRequestHeader("Content-type", "application/json");
+
+    ourRequest.onload=function()
+    {
+        //alert(ourRequest.responseText);
+        $('#outputTask').val(ourRequest.responseText);
+    };
+
+    var json=JSON.stringify(task);
+
+    ourRequest.send(json);
 }
